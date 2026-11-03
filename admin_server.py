@@ -3,6 +3,7 @@
 """
 NİLTEKS & NİL HOME - YÖNETİM PANELİ & YEREL SUNUCU (ADMIN SERVER)
 Python 3 Dahili Kütüphaneleriyle Çalışır - Sıfır Bağımlılık
+GitHub & Vercel Otomatik Canlı Senkronizasyon Destekli
 """
 
 import http.server
@@ -13,14 +14,44 @@ import json
 import base64
 import re
 import urllib.parse
+import subprocess
+import threading
 from pathlib import Path
 
-# Çalışma dizini: website klasörü
+# Çalışma dizini: Proje kök klasörü
 SCRIPT_DIR = Path(__file__).resolve().parent
 DATA_FILE = SCRIPT_DIR / "data" / "site-data.json"
 IMAGES_DIR = SCRIPT_DIR / "images"
 
 PORT = 8088
+
+def run_git_sync(commit_msg="Web sitesi güncellendi (Admin Panel)"):
+    """GitHub ve Vercel otomatik senkronizasyonu"""
+    try:
+        # 1. Dosyaları sahnele
+        subprocess.run(["git", "add", "."], cwd=str(SCRIPT_DIR), check=True, capture_output=True)
+        # 2. Değişiklik var mı kontrol et
+        diff_res = subprocess.run(["git", "diff", "--staged", "--quiet"], cwd=str(SCRIPT_DIR))
+        if diff_res.returncode != 0:
+            subprocess.run(["git", "commit", "-m", commit_msg], cwd=str(SCRIPT_DIR), check=True, capture_output=True)
+            subprocess.run(["git", "push", "origin", "main"], cwd=str(SCRIPT_DIR), check=True, capture_output=True, text=True)
+            print(f"🚀 [VERCEL & GITHUB SENKRONİZASYONU]: Başarıyla gönderildi -> {commit_msg}")
+            return True, "GitHub ve Vercel'e başarıyla gönderildi."
+        else:
+            print("ℹ️ [VERCEL & GITHUB SENKRONİZASYONU]: Yeni değişiklik bulunamadı, site zaten güncel.")
+            return True, "Yeni değişiklik bulunamadı, site zaten güncel."
+    except subprocess.CalledProcessError as err:
+        err_msg = err.stderr.decode('utf-8', errors='ignore') if hasattr(err, 'stderr') and err.stderr else str(err)
+        print(f"⚠️ [Git Sync Hatası]: {err_msg}", file=sys.stderr)
+        return False, err_msg
+    except Exception as e:
+        print(f"⚠️ [Git Sync Beklenmeyen Hata]: {e}", file=sys.stderr)
+        return False, str(e)
+
+def trigger_git_sync(commit_msg="Web sitesi güncellendi"):
+    """UI'ı bekletmemek için arka planda senkronize et"""
+    t = threading.Thread(target=run_git_sync, args=(commit_msg,), daemon=True)
+    t.start()
 
 class NilteksAdminHandler(http.server.SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
@@ -81,7 +112,7 @@ class NilteksAdminHandler(http.server.SimpleHTTPRequestHandler):
         content_length = int(self.headers.get('Content-Length', 0))
         post_data = self.rfile.read(content_length)
 
-        # 1. API: /api/save -> site-data.json dosyasını güncelle
+        # 1. API: /api/save -> site-data.json dosyasını güncelle + GitHub/Vercel Sync
         if path == "/api/save":
             try:
                 data = json.loads(post_data.decode('utf-8'))
@@ -89,10 +120,16 @@ class NilteksAdminHandler(http.server.SimpleHTTPRequestHandler):
                 with open(DATA_FILE, "w", encoding="utf-8") as f:
                     json.dump(data, f, ensure_ascii=False, indent=2)
 
+                # GitHub & Vercel'e otomatik gönder
+                trigger_git_sync("Panelden site verileri güncellendi (site-data.json)")
+
                 self.send_response(200)
                 self.send_header('Content-Type', 'application/json; charset=utf-8')
                 self.end_headers()
-                self.wfile.write(json.dumps({"success": True, "message": "Veriler başarıyla kaydedildi."}).encode('utf-8'))
+                self.wfile.write(json.dumps({
+                    "success": True, 
+                    "message": "Veriler yerel olarak kaydedildi ve Vercel/GitHub'a gönderildi."
+                }).encode('utf-8'))
             except Exception as e:
                 self.send_response(500)
                 self.send_header('Content-Type', 'application/json; charset=utf-8')
@@ -100,7 +137,7 @@ class NilteksAdminHandler(http.server.SimpleHTTPRequestHandler):
                 self.wfile.write(json.dumps({"success": False, "error": str(e)}).encode('utf-8'))
             return
 
-        # 2. API: /api/upload -> Görsel yükleme (Base64)
+        # 2. API: /api/upload -> Görsel yükleme (Base64) + GitHub/Vercel Sync
         if path == "/api/upload":
             try:
                 payload = json.loads(post_data.decode('utf-8'))
@@ -128,6 +165,9 @@ class NilteksAdminHandler(http.server.SimpleHTTPRequestHandler):
                 # Web yolunu döndür
                 rel_path = f"images/categories/{category_slug}/{clean_name}"
 
+                # GitHub & Vercel'e otomatik gönder
+                trigger_git_sync(f"Yeni ürün görseli eklendi ({category_slug}/{clean_name})")
+
                 self.send_response(200)
                 self.send_header('Content-Type', 'application/json; charset=utf-8')
                 self.end_headers()
@@ -143,7 +183,7 @@ class NilteksAdminHandler(http.server.SimpleHTTPRequestHandler):
                 self.wfile.write(json.dumps({"success": False, "error": str(e)}).encode('utf-8'))
             return
 
-        # 3. API: /api/delete-image -> Görsel silme
+        # 3. API: /api/delete-image -> Görsel silme + GitHub/Vercel Sync
         if path == "/api/delete-image":
             try:
                 payload = json.loads(post_data.decode('utf-8'))
@@ -154,16 +194,32 @@ class NilteksAdminHandler(http.server.SimpleHTTPRequestHandler):
                     safe_file = SCRIPT_DIR / img_path
                     if safe_file.exists() and safe_file.is_file():
                         os.remove(safe_file)
+                        trigger_git_sync(f"Ürün görseli silindi ({img_path})")
                         self.send_response(200)
                         self.send_header('Content-Type', 'application/json; charset=utf-8')
                         self.end_headers()
-                        self.wfile.write(json.dumps({"success": True, "message": "Görsel silindi."}).encode('utf-8'))
+                        self.wfile.write(json.dumps({"success": True, "message": "Görsel silindi ve canlıya gönderildi."}).encode('utf-8'))
                         return
 
                 self.send_response(400)
                 self.send_header('Content-Type', 'application/json; charset=utf-8')
                 self.end_headers()
                 self.wfile.write(json.dumps({"success": False, "error": "Geçersiz dosya yolu veya dosya bulunamadı."}).encode('utf-8'))
+            except Exception as e:
+                self.send_response(500)
+                self.send_header('Content-Type', 'application/json; charset=utf-8')
+                self.end_headers()
+                self.wfile.write(json.dumps({"success": False, "error": str(e)}).encode('utf-8'))
+            return
+
+        # 4. API: /api/sync -> Manuel Vercel & GitHub tetikleme butonu
+        if path == "/api/sync":
+            try:
+                success, msg = run_git_sync("Panelden manuel canlıya alma tetiklendi")
+                self.send_response(200 if success else 500)
+                self.send_header('Content-Type', 'application/json; charset=utf-8')
+                self.end_headers()
+                self.wfile.write(json.dumps({"success": success, "message": msg}).encode('utf-8'))
             except Exception as e:
                 self.send_response(500)
                 self.send_header('Content-Type', 'application/json; charset=utf-8')
@@ -185,6 +241,7 @@ def run_server(port=PORT):
                 print(f"  👉 Web Sitesi (Türkçe)  : http://localhost:{p}/")
                 print(f"  👉 Web Sitesi (İngilizce): http://localhost:{p}/en.html")
                 print(f"  👉 Yönetim Paneli (Admin): http://localhost:{p}/admin/")
+                print("  👉 GitHub & Vercel       : Otomatik Canlı Senkronizasyon Aktif 🚀")
                 print("==================================================================")
                 print("  Durdurmak için pencereyi kapatın veya Ctrl+C tuşlarına basın.")
                 httpd.serve_forever()

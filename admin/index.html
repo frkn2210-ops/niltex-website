@@ -773,6 +773,9 @@
         <button class="btn btn-primary" id="btnSaveAllChanges">
           💾 Değişiklikleri Kaydet
         </button>
+        <button class="btn" id="btnSyncVercel" style="background: #111; color: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.25);" title="GitHub ve Vercel'e hemen gönder">
+          ▲ Vercel'e Gönder (Canlı)
+        </button>
       </div>
     </header>
 
@@ -1554,9 +1557,31 @@
     document.getElementById('btnSaveAllChanges').onclick = async () => {
       const ok = await saveAllDataToServer();
       if (ok) {
-        showToast('💾 Tüm değişiklikler web sitesine kaydedildi!');
+        showToast('💾 Değişiklikler kaydedildi ve Vercel/GitHub senkronizasyonu başlatıldı!');
       } else {
         showToast('⚠️ Sunucuya kaydedilemedi, yerel bağlantınızı kontrol edin.');
+      }
+    };
+
+    document.getElementById('btnSyncVercel').onclick = async () => {
+      const btn = document.getElementById('btnSyncVercel');
+      const originalText = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '⏳ Gönderiliyor...';
+      showToast('🚀 GitHub & Vercel senkronizasyonu başlatıldı...');
+      try {
+        const res = await fetch('/api/sync', { method: 'POST' });
+        const result = await res.json();
+        if (result.success) {
+          showToast('✓ ' + result.message);
+        } else {
+          showToast('⚠️ Senkronizasyon hatası: ' + (result.error || result.message));
+        }
+      } catch (e) {
+        showToast('⚠️ Sunucu bağlantı hatası.');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = originalText;
       }
     };
 
