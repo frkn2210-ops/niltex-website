@@ -1,0 +1,1664 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nilteks & Nil Home | Yönetim Paneli</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-body: #F7F5F0;
+      --bg-surface: #FFFFFF;
+      --bg-sidebar: #22201D;
+      --text-main: #2A2723;
+      --text-muted: #736D64;
+      --text-light: #A8A196;
+      --primary: #4E614A;
+      --primary-dark: #374634;
+      --primary-light: #70856B;
+      --primary-soft: #EAF0E9;
+      --accent: #BA7353;
+      --accent-soft: #F9EFEA;
+      --border: #E8E2D8;
+      --border-focus: #4E614A;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --shadow-sm: 0 2px 8px rgba(34, 32, 29, 0.04);
+      --shadow-md: 0 8px 24px rgba(34, 32, 29, 0.08);
+      --shadow-lg: 0 16px 40px rgba(34, 32, 29, 0.12);
+      --transition: all 0.25s ease;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      background: var(--bg-body);
+      color: var(--text-main);
+      display: flex;
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    /* Sol Sidebar */
+    .sidebar {
+      width: 280px;
+      background: var(--bg-sidebar);
+      color: #E5DFD5;
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      border-right: 1px solid #332F2A;
+      z-index: 100;
+    }
+
+    .sidebar-brand {
+      padding: 24px 20px;
+      border-bottom: 1px solid #332F2A;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-sm);
+      background: #FFFFFF;
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .brand-avatar img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .brand-text h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      color: #FFFFFF;
+      line-height: 1.2;
+    }
+
+    .brand-text span {
+      font-size: 0.75rem;
+      color: #9E9689;
+      letter-spacing: 0.5px;
+    }
+
+    .sidebar-nav {
+      padding: 20px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex-grow: 1;
+      overflow-y: auto;
+    }
+
+    .nav-category-title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #7A7265;
+      padding: 12px 10px 4px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 14px;
+      border-radius: var(--radius-sm);
+      color: #C7BFB1;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      border: 1px solid transparent;
+    }
+
+    .nav-item:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: #FFFFFF;
+    }
+
+    .nav-item.active {
+      background: var(--primary);
+      color: #FFFFFF;
+      box-shadow: 0 4px 12px rgba(78, 97, 74, 0.4);
+    }
+
+    .nav-item-icon {
+      font-size: 1.15rem;
+      width: 22px;
+      text-align: center;
+    }
+
+    .sidebar-footer {
+      padding: 16px;
+      border-top: 1px solid #332F2A;
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    .preview-btns {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .btn-preview {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 14px;
+      background: rgba(255, 255, 255, 0.08);
+      color: #E5DFD5;
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .btn-preview:hover {
+      background: rgba(255, 255, 255, 0.16);
+      color: #FFFFFF;
+    }
+
+    /* Ana İçerik Alanı */
+    .main-wrapper {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow-y: auto;
+    }
+
+    .top-header {
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 36px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 90;
+    }
+
+    .header-title-box h1 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .header-title-box p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 18px;
+      border-radius: var(--radius-sm);
+      font-size: 0.86rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: var(--transition);
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #FFFFFF;
+      box-shadow: 0 4px 12px rgba(78, 97, 74, 0.25);
+    }
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: var(--bg-body);
+      color: var(--text-main);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover {
+      background: #EFEBE3;
+    }
+
+    .btn-danger {
+      background: #FEE8E7;
+      color: #C53030;
+      border: 1px solid #FEB2B2;
+    }
+    .btn-danger:hover {
+      background: #FED7D7;
+    }
+
+    .content-area {
+      padding: 32px 36px;
+      max-width: 1400px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    /* Sekme Panelleri */
+    .tab-panel {
+      display: none;
+      animation: fadeIn 0.25s ease forwards;
+    }
+    .tab-panel.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Kategori Yatay Menüsü */
+    .category-tabs-bar {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 12px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cat-tab-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-full, 999px);
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: var(--transition);
+    }
+
+    .cat-tab-btn:hover {
+      border-color: var(--primary);
+      color: var(--text-main);
+    }
+
+    .cat-tab-btn.active {
+      background: var(--primary);
+      color: #FFFFFF;
+      border-color: var(--primary);
+      box-shadow: 0 4px 10px rgba(78, 97, 74, 0.2);
+    }
+
+    .cat-badge-count {
+      background: rgba(0, 0, 0, 0.08);
+      padding: 1px 7px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+    }
+
+    .cat-tab-btn.active .cat-badge-count {
+      background: rgba(255, 255, 255, 0.25);
+      color: #FFFFFF;
+    }
+
+    /* Görsel Yükleme Dropzone Alanı */
+    .upload-card {
+      background: var(--bg-surface);
+      border: 2px dashed var(--primary-light);
+      border-radius: var(--radius-md);
+      padding: 32px 24px;
+      text-align: center;
+      cursor: pointer;
+      transition: var(--transition);
+      margin-bottom: 28px;
+      position: relative;
+    }
+
+    .upload-card:hover, .upload-card.dragover {
+      background: var(--primary-soft);
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    .upload-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--primary-soft);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      margin: 0 auto 12px;
+    }
+
+    .upload-card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .upload-card p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .upload-input {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Ürün & Fotoğraf Kartları Grid */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 22px;
+    }
+
+    .admin-card {
+      background: var(--bg-surface);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition);
+    }
+
+    .admin-card:hover {
+      box-shadow: var(--shadow-md);
+      border-color: var(--primary-light);
+    }
+
+    .card-thumb-wrapper {
+      position: relative;
+      aspect-ratio: 2 / 3; /* 1200x1800 px standart dikey katalog formatı */
+      background: #F0ECE4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .card-thumb-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .thumb-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      gap: 6px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .thumb-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .card-actions-overlay {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      display: flex;
+      gap: 6px;
+    }
+
+    .btn-icon-action {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: var(--transition);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-icon-action:hover {
+      transform: scale(1.1);
+      background: #FFFFFF;
+    }
+
+    .btn-icon-delete:hover {
+      background: #FEE8E7;
+      color: #C53030;
+      border-color: #FEB2B2;
+    }
+
+    .card-body {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .card-title-tr {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 2px;
+    }
+
+    .card-title-en {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-style: italic;
+      margin-bottom: 10px;
+    }
+
+    .card-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 14px;
+      flex-grow: 1;
+    }
+
+    .card-specs-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-bottom: 14px;
+      padding-top: 10px;
+      border-top: 1px dashed var(--border);
+    }
+
+    .spec-tag {
+      font-size: 0.72rem;
+      background: var(--bg-body);
+      color: var(--text-main);
+      padding: 3px 8px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+    }
+
+    .card-footer-btns {
+      display: flex;
+      gap: 8px;
+      margin-top: auto;
+    }
+
+    .card-footer-btns .btn {
+      flex: 1;
+      justify-content: center;
+      font-size: 0.8rem;
+      padding: 8px 12px;
+    }
+
+    /* Ayarlar & Form Panelleri */
+    .settings-panel {
+      background: var(--bg-surface);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 28px;
+    }
+
+    .panel-header {
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 14px;
+    }
+
+    .panel-header h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+    .panel-header p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-bottom: 16px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .form-group span.help-text {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 10px 14px;
+      background: var(--bg-body);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 0.88rem;
+      color: var(--text-main);
+      font-family: inherit;
+      transition: var(--transition);
+    }
+
+    .form-control:focus {
+      background: #FFFFFF;
+      border-color: var(--primary);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(78, 97, 74, 0.15);
+    }
+
+    textarea.form-control {
+      min-height: 80px;
+      resize: vertical;
+    }
+
+    /* Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-backdrop.active {
+      display: flex;
+    }
+
+    .modal-window {
+      background: var(--bg-surface);
+      border-radius: var(--radius-lg);
+      max-width: 680px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 32px;
+      position: relative;
+      box-shadow: var(--shadow-lg);
+      animation: modalScale 0.25s ease;
+    }
+
+    @keyframes modalScale {
+      from { transform: scale(0.95); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--bg-body);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      transition: var(--transition);
+    }
+    .modal-close:hover {
+      background: #FFFFFF;
+      color: var(--text-main);
+    }
+
+    /* Toast Bildirim */
+    .toast-notification {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #2A2723;
+      color: #FFFFFF;
+      padding: 14px 22px;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      font-size: 0.88rem;
+      font-weight: 600;
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      gap: 10px;
+      border-left: 4px solid #48BB78;
+      animation: toastIn 0.3s ease;
+    }
+    .toast-notification.active {
+      display: flex;
+    }
+
+    @keyframes toastIn {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SOL SIDEBAR MENÜSÜ -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-avatar">
+        <img src="../images/logo-nilteks.jpg" alt="Nilteks Logo">
+      </div>
+      <div class="brand-text">
+        <h2>Nilteks Panel</h2>
+        <span>niltex.com.tr Yönetimi</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-category-title">İçerik Yönetimi</div>
+      <a class="nav-item active" data-tab="tab-categories">
+        <span class="nav-item-icon">🖼️</span>
+        <span>Kategori & Görseller</span>
+      </a>
+      <a class="nav-item" data-tab="tab-add-product">
+        <span class="nav-item-icon">➕</span>
+        <span>Yeni Ürün Ekle</span>
+      </a>
+
+      <div class="nav-category-title">Site Ayarları</div>
+      <a class="nav-item" data-tab="tab-contact">
+        <span class="nav-item-icon">🏢</span>
+        <span>İletişim & Furkan Aydın</span>
+      </a>
+      <a class="nav-item" data-tab="tab-banner">
+        <span class="nav-item-icon">📢</span>
+        <span>Duyuru & Banner</span>
+      </a>
+      <a class="nav-item" data-tab="tab-backup">
+        <span class="nav-item-icon">💾</span>
+        <span>Yedekleme & Sıfırlama</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="preview-btns">
+        <a href="/" target="_blank" class="btn-preview">
+          <span>🇹🇷</span>
+          <span>Türkçe Siteyi Gör</span>
+        </a>
+        <a href="/en.html" target="_blank" class="btn-preview">
+          <span>🇬🇧</span>
+          <span>İngilizce Siteyi Gör</span>
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- SAĞ ANA İÇERİK ALANI -->
+  <main class="main-wrapper">
+    <header class="top-header">
+      <div class="header-title-box">
+        <h1 id="pageHeading">Kategori & Görsel Yönetimi</h1>
+        <p id="pageSubHeading">8 ana ürün grubunuza ait fotoğrafları yükleyebilir, düzenleyebilir ve silebilirsiniz.</p>
+      </div>
+
+      <div class="header-actions">
+        <button class="btn btn-secondary" id="btnRefreshData">
+          🔄 Yenile
+        </button>
+        <button class="btn btn-primary" id="btnSaveAllChanges">
+          💾 Değişiklikleri Kaydet
+        </button>
+      </div>
+    </header>
+
+    <div class="content-area">
+
+      <!-- ===================================================================
+           1. SEKME: KATEGORİ & GÖRSEL YÖNETİMİ
+           =================================================================== -->
+      <section class="tab-panel active" id="tab-categories">
+        <!-- 8 Kategori Butonları -->
+        <div class="category-tabs-bar" id="categoryTabsBar">
+          <!-- JS ile doldurulacak -->
+        </div>
+
+        <!-- Seçili Kategori Başlığı -->
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
+          <div>
+            <h2 id="currentCategoryTitle" style="font-size: 1.35rem; font-weight: 700;">Mutfak Peçeteleri</h2>
+            <p id="currentCategorySub" style="font-size: 0.85rem; color: var(--text-muted);">Bu kategoriye ait ürün modelleri ve fotoğraflar</p>
+          </div>
+          <button class="btn btn-primary" id="btnOpenNewItemForCat">
+            + Bu Kategoriye Ürün Ekle
+          </button>
+        </div>
+
+        <!-- Hızlı Görsel Yükleme Dropzone -->
+        <div class="upload-card" id="dropzoneUpload">
+          <input type="file" class="upload-input" id="fileInputDirect" accept="image/*" multiple>
+          <div class="upload-icon">📷</div>
+          <h3 id="dropzoneText">Fotoğrafları Buraya Sürükleyin veya Tıklayın</h3>
+          <p id="dropzoneSubText">Yüklenen fotoğraflar otomatik olarak <strong>1200 × 1800 px (2:3 Dikey Katalog)</strong> ebatına optimize edilir.</p>
+          <div style="margin-top: 10px; display: inline-flex; align-items: center; gap: 6px; background: var(--primary-soft); color: var(--primary-dark); padding: 4px 12px; border-radius: 999px; font-size: 0.76rem; font-weight: 700;">
+            📐 Standart Katalog Boyutu: 1200 × 1800 px
+          </div>
+        </div>
+
+        <!-- Kategoriye Ait Ürün Kartları -->
+        <div class="products-grid" id="categoryProductsGrid">
+          <!-- JS ile kartlar listelenecek -->
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           2. SEKME: YENİ ÜRÜN / MODEL EKLE
+           =================================================================== -->
+      <section class="tab-panel" id="tab-add-product">
+        <div class="settings-panel">
+          <div class="panel-header">
+            <h3>Yeni Ürün Modeli Oluştur</h3>
+            <p>Seçeceğiniz kategoriye fotoğrafı, ebatları ve açıklamalarıyla birlikte yeni bir model kartı ekleyin.</p>
+          </div>
+
+          <form id="newProductForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Hedef Kategori *</label>
+                <select class="form-control" id="newProdCategory" required></select>
+              </div>
+              <div class="form-group">
+                <label>Görsel Yükle (Fotoğraf Dosyası) *</label>
+                <input type="file" class="form-control" id="newProdImageFile" accept="image/*">
+                <span class="help-text">Bilgisayarınızdan fotoğraf seçin.</span>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Türkçe Başlık *</label>
+                <input type="text" class="form-control" id="newProdTitleTr" placeholder="Örn: Jakarlı Lüks Keten Peçete" required>
+              </div>
+              <div class="form-group">
+                <label>İngilizce Başlık *</label>
+                <input type="text" class="form-control" id="newProdTitleEn" placeholder="e.g. Jacquard Luxury Linen Napkin" required>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Türkçe Açıklama</label>
+                <textarea class="form-control" id="newProdDescTr" placeholder="Yüksek emicilik, yumuşak doku ve zarafet..."></textarea>
+              </div>
+              <div class="form-group">
+                <label>İngilizce Açıklama</label>
+                <textarea class="form-control" id="newProdDescEn" placeholder="High absorbency, soft texture and dining elegance..."></textarea>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Türkçe Özellik Etiketleri (Virgülle Ayırın)</label>
+                <input type="text" class="form-control" id="newProdSpecsTr" placeholder="%100 Pamuk, 450 gr/m2, 45x45 cm">
+              </div>
+              <div class="form-group">
+                <label>İngilizce Özellik Etiketleri (Virgülle Ayırın)</label>
+                <input type="text" class="form-control" id="newProdSpecsEn" placeholder="100% Cotton, 450 GSM, 45x45 cm">
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="padding: 12px 24px;">
+              ✓ Ürünü ve Fotoğrafı Kaydet
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           3. SEKME: İLETİŞİM & FURKAN AYDIN BİLGİLERİ
+           =================================================================== -->
+      <section class="tab-panel" id="tab-contact">
+        <div class="settings-panel">
+          <div class="panel-header">
+            <h3>Furkan Aydın İletişim Bilgileri</h3>
+            <p>Sitedeki WhatsApp butonları ve iletişim kartında görünen yetkili bilgileri</p>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Yetkili Adı Soyadı</label>
+              <input type="text" class="form-control" id="repName" value="FURKAN AYDIN">
+            </div>
+            <div class="form-group">
+              <label>Doğrudan E-Posta</label>
+              <input type="email" class="form-control" id="repEmail" value="furkan@niltex.com.tr">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Telefon & WhatsApp Numarası</label>
+              <input type="text" class="form-control" id="repPhone" value="+90 551 410 24 51">
+            </div>
+            <div class="form-group">
+              <label>Türkçe Ünvan</label>
+              <input type="text" class="form-control" id="repRoleTr" value="Müşteri İlişkileri & İhracat / Satış">
+            </div>
+          </div>
+        </div>
+
+        <div class="settings-panel">
+          <div class="panel-header">
+            <h3>Genel Firma & Fabrika Bilgileri</h3>
+            <p>Web sitesinin alt kısmında ve iletişim sayfasında yer alan kurumsal veriler</p>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Genel İletişim E-Postası (Sadece)</label>
+              <input type="email" class="form-control" id="genEmail" value="info@niltex.com.tr">
+            </div>
+            <div class="form-group">
+              <label>Web Sitesi Alan Adı</label>
+              <input type="text" class="form-control" id="webDomain" value="niltex.com.tr">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Fabrika Telefon & Faks</label>
+              <input type="text" class="form-control" id="facPhone" value="+90 (258) 241 72 99">
+            </div>
+            <div class="form-group">
+              <label>Instagram Sayfa Adresi</label>
+              <input type="url" class="form-control" id="instaUrl" value="https://www.instagram.com/nil.textile/">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Fabrika Adresi (Türkçe)</label>
+            <input type="text" class="form-control" id="facAddrTr" value="Akçeşme Mah. 2606 Sok. No:6 Merkezefendi, Denizli / TÜRKİYE">
+          </div>
+
+          <div class="form-group">
+            <label>Fabrika Adresi (İngilizce)</label>
+            <input type="text" class="form-control" id="facAddrEn" value="Akçeşme Mah. 2606 Sok. No:6 Merkezefendi, Denizli / TURKEY">
+          </div>
+
+          <button type="button" class="btn btn-primary" id="btnSaveContactSettings" style="padding: 12px 24px;">
+            ✓ İletişim Bilgilerini Kaydet
+          </button>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           4. SEKME: DUYURU & BANNER
+           =================================================================== -->
+      <section class="tab-panel" id="tab-banner">
+        <div class="settings-panel">
+          <div class="panel-header">
+            <h3>Koleksiyon Bilgilendirme Banner'ı</h3>
+            <p>Ürün kategorilerinin hemen altında yer alan fotoğraf güncelleme duyurusunu düzenleyebilirsiniz.</p>
+          </div>
+
+          <div class="form-group">
+            <label>Banner Başlığı (Türkçe)</label>
+            <input type="text" class="form-control" id="bannerTitleTr">
+          </div>
+          <div class="form-group">
+            <label>Banner Başlığı (İngilizce)</label>
+            <input type="text" class="form-control" id="bannerTitleEn">
+          </div>
+
+          <div class="form-group">
+            <label>Banner Açıklama Metni (Türkçe)</label>
+            <textarea class="form-control" id="bannerDescTr"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Banner Açıklama Metni (İngilizce)</label>
+            <textarea class="form-control" id="bannerDescEn"></textarea>
+          </div>
+
+          <button type="button" class="btn btn-primary" id="btnSaveBannerSettings" style="padding: 12px 24px;">
+            ✓ Banner Metinlerini Kaydet
+          </button>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           5. SEKME: YEDEKLEME & SIFIRLAMA
+           =================================================================== -->
+      <section class="tab-panel" id="tab-backup">
+        <div class="settings-panel">
+          <div class="panel-header">
+            <h3>Veri Yedekleme ve Dışa Aktarma</h3>
+            <p>Tüm ürünleri, kategori ayarlarını ve iletişim bilgilerinizi tek bir JSON dosyası olarak bilgisayarınıza indirebilirsiniz.</p>
+          </div>
+
+          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <button class="btn btn-primary" id="btnDownloadBackup">
+              📥 JSON Yedek Dosyasını İndir
+            </button>
+            <label class="btn btn-secondary" style="cursor: pointer;">
+              📤 JSON Yedek Dosyasını Yükle
+              <input type="file" id="fileInputRestore" accept=".json" style="display: none;">
+            </label>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ÜRÜN DÜZENLEME MODALI -->
+  <div class="modal-backdrop" id="editModal">
+    <div class="modal-window">
+      <div class="modal-close" id="btnEditModalClose">&times;</div>
+      <h3 style="font-size: 1.3rem; margin-bottom: 6px;">Ürün / Fotoğraf Düzenle</h3>
+      <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;">Ürünün fotoğrafını değiştirebilir, başlık ve ebat özelliklerini güncelleyebilirsiniz.</p>
+
+      <form id="editProductForm">
+        <input type="hidden" id="editProdId">
+
+        <div style="display: flex; gap: 18px; margin-bottom: 18px; align-items: center;">
+          <div style="width: 100px; height: 150px; border-radius: var(--radius-sm); border: 1px solid var(--border); overflow: hidden; background: #EEE; flex-shrink: 0;" id="editImagePreviewBox">
+            <img src="" id="editImagePreview" style="width: 100%; height: 100%; object-fit: cover;">
+          </div>
+          <div>
+            <label style="font-size: 0.82rem; font-weight: 700; display: block; margin-bottom: 4px;">Fotoğrafı Değiştir (Standart: 1200x1800 px)</label>
+            <input type="file" class="form-control" id="editImageFileInput" accept="image/*">
+            <span class="help-text">Seçilen görsel otomatik olarak 1200 × 1800 px dikey katalog formatına ayarlanır.</span>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Türkçe Başlık</label>
+            <input type="text" class="form-control" id="editTitleTr" required>
+          </div>
+          <div class="form-group">
+            <label>İngilizce Başlık</label>
+            <input type="text" class="form-control" id="editTitleEn" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Türkçe Açıklama</label>
+            <textarea class="form-control" id="editDescTr"></textarea>
+          </div>
+          <div class="form-group">
+            <label>İngilizce Açıklama</label>
+            <textarea class="form-control" id="editDescEn"></textarea>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Türkçe Özellikler (Virgülle)</label>
+            <input type="text" class="form-control" id="editSpecsTr">
+          </div>
+          <div class="form-group">
+            <label>İngilizce Özellikler (Virgülle)</label>
+            <input type="text" class="form-control" id="editSpecsEn">
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 10px;">
+          <button type="button" class="btn btn-secondary" id="btnCancelEdit">Vazgeç</button>
+          <button type="submit" class="btn btn-primary">Kaydet & Güncelle</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- TOAST BİLDİRİM -->
+  <div class="toast-notification" id="toast">
+    <span id="toastMsg">İşlem başarıyla gerçekleştirildi.</span>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    let siteData = null;
+    let selectedCategoryId = 'mutfak-peceteleri';
+
+    // 1. Verileri Yükle
+    async function loadData() {
+      try {
+        const res = await fetch('/api/data');
+        if (!res.ok) throw new Error('API yanıt vermedi');
+        siteData = await res.json();
+      } catch (e) {
+        console.warn('Sunucu API bulunamadı, yerel data/site-data.json yükleniyor...', e);
+        const res = await fetch('../data/site-data.json');
+        siteData = await res.json();
+      }
+      renderUI();
+    }
+
+    // 2. Tüm UI'yı Çiz
+    function renderUI() {
+      if (!siteData) return;
+
+      // Kategorileri ve Kategori Butonlarını Çiz
+      renderCategoryTabs();
+      renderCategoryProducts(selectedCategoryId);
+      renderContactSettings();
+      renderBannerSettings();
+      populateCategorySelects();
+    }
+
+    // 3. Kategori Sekmeleri
+    function renderCategoryTabs() {
+      const container = document.getElementById('categoryTabsBar');
+      container.innerHTML = '';
+
+      siteData.categories.forEach(cat => {
+        const prodCount = siteData.products.filter(p => p.categoryId === cat.id).length;
+        const btn = document.createElement('button');
+        btn.className = `cat-tab-btn ${cat.id === selectedCategoryId ? 'active' : ''}`;
+        btn.innerHTML = `<span>${cat.icon}</span> <span>${cat.nameTr}</span> <span class="cat-badge-count">${prodCount}</span>`;
+        btn.onclick = () => {
+          selectedCategoryId = cat.id;
+          renderCategoryTabs();
+          renderCategoryProducts(cat.id);
+        };
+        container.appendChild(btn);
+      });
+    }
+
+    // 4. Kategoriye Ait Ürün Kartlarını Çiz
+    function renderCategoryProducts(catId) {
+      const cat = siteData.categories.find(c => c.id === catId);
+      if (!cat) return;
+
+      document.getElementById('currentCategoryTitle').innerText = `${cat.icon} ${cat.nameTr}`;
+      document.getElementById('currentCategorySub').innerText = `${cat.groupTr} • Klasör: ${cat.folder}`;
+      document.getElementById('dropzoneText').innerText = `"${cat.nameTr}" İçin Fotoğraf Sürükleyin veya Tıklayın`;
+
+      const grid = document.getElementById('categoryProductsGrid');
+      grid.innerHTML = '';
+
+      const products = siteData.products.filter(p => p.categoryId === catId);
+
+      if (products.length === 0) {
+        grid.innerHTML = `
+          <div style="grid-column: 1/-1; background: #FFF; border: 1px dashed var(--border); border-radius: var(--radius-md); padding: 40px; text-align: center; color: var(--text-muted);">
+            <div style="font-size: 2.5rem; margin-bottom: 10px;">📷</div>
+            <h4 style="font-weight: 700;">Bu kategoride henüz fotoğraf yok</h4>
+            <p style="font-size: 0.85rem;">Yukarıdaki kutudan fotoğraf yükleyebilir veya "+ Bu Kategoriye Ürün Ekle" butonuna basabilirsiniz.</p>
+          </div>
+        `;
+        return;
+      }
+
+      products.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'admin-card';
+
+        const hasImg = p.image && p.image.trim() !== '';
+        const imgSrc = hasImg ? `../${p.image}` : '';
+
+        card.innerHTML = `
+          <div class="card-thumb-wrapper">
+            ${hasImg 
+              ? `<img src="${imgSrc}" alt="${p.titleTr}" onerror="this.src='../images/logo-nilhome.jpg'">`
+              : `<div class="thumb-placeholder">
+                  <div style="font-size: 2rem;">📷</div>
+                  <span style="font-size: 0.75rem; font-weight: 700;">Görsel Bekleniyor</span>
+                 </div>`
+            }
+            <span class="thumb-badge">${hasImg ? '✓ Fotoğraf Yüklendi' : 'Taslak'}</span>
+            <div class="card-actions-overlay">
+              <button class="btn-icon-action btn-icon-delete" title="Ürünü Sil" onclick="deleteProduct('${p.id}')">🗑️</button>
+            </div>
+          </div>
+          <div class="card-body">
+            <h4 class="card-title-tr">${p.titleTr}</h4>
+            <div class="card-title-en">${p.titleEn || ''}</div>
+            <p class="card-desc">${p.descTr || 'Açıklama girilmemiş.'}</p>
+            <div class="card-specs-tags">
+              ${(p.specsTr || []).map(s => `<span class="spec-tag">${s}</span>`).join('')}
+            </div>
+            <div class="card-footer-btns">
+              <button class="btn btn-secondary" onclick="openEditModal('${p.id}')">✏️ Düzenle</button>
+              <label class="btn btn-primary" style="cursor: pointer; margin: 0;">
+                📷 Fotoğraf Değiştir
+                <input type="file" accept="image/*" style="display: none;" onchange="uploadSingleImageForProduct(this, '${p.id}', '${cat.id}')">
+              </label>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    // 5. Dropzone ile Toplu / Tekli Fotoğraf Yükleme
+    const dropzone = document.getElementById('dropzoneUpload');
+    const fileInputDirect = document.getElementById('fileInputDirect');
+
+    dropzone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dropzone.classList.add('dragover');
+    });
+    dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragover'));
+    dropzone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropzone.classList.remove('dragover');
+      if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+        handleDirectFiles(e.dataTransfer.files);
+      }
+    });
+
+    fileInputDirect.addEventListener('change', () => {
+      if (fileInputDirect.files && fileInputDirect.files.length > 0) {
+        handleDirectFiles(fileInputDirect.files);
+      }
+    });
+
+    async function handleDirectFiles(files) {
+      showToast(`📸 ${files.length} fotoğraf 1200×1800 px ebatında optimize edilip yükleniyor...`);
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const dataUrl = await fileToDataUrl(file);
+        
+        try {
+          const res = await fetch('/api/upload', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              categoryId: selectedCategoryId,
+              filename: file.name,
+              dataUrl: dataUrl
+            })
+          });
+          const result = await res.json();
+
+          if (result.success) {
+            // İlgili kategoride boş görseli olan ilk ürüne ata veya yeni ürün oluştur!
+            let emptyProd = siteData.products.find(p => p.categoryId === selectedCategoryId && (!p.image || p.image === ''));
+            if (emptyProd) {
+              emptyProd.image = result.imagePath;
+            } else {
+              const cat = siteData.categories.find(c => c.id === selectedCategoryId);
+              const newProd = {
+                id: 'prod_' + Date.now() + '_' + i,
+                categoryId: selectedCategoryId,
+                titleTr: file.name.replace(/\.[^/.]+$/, "").replace(/[-_]/g, " "),
+                titleEn: file.name.replace(/\.[^/.]+$/, "").replace(/[-_]/g, " "),
+                descTr: `${cat.nameTr} koleksiyonu yeni sezon modeli.`,
+                descEn: `${cat.nameEn} new season collection model.`,
+                specsTr: ["%100 Pamuk", "Özel Dokuma"],
+                specsEn: ["100% Cotton", "Custom Weave"],
+                image: result.imagePath,
+                badgeTr: "Yeni Koleksiyon",
+                badgeEn: "New Collection"
+              };
+              siteData.products.push(newProd);
+            }
+          }
+        } catch (e) {
+          console.error('Yükleme hatası:', e);
+        }
+      }
+
+      await saveAllDataToServer();
+      renderCategoryProducts(selectedCategoryId);
+      renderCategoryTabs();
+      showToast('✓ Fotoğraflar başarıyla yüklendi ve eklendi!');
+    }
+
+    // 6. Tek Bir Ürünün Görselini Değiştirme
+    async function uploadSingleImageForProduct(input, prodId, catId) {
+      if (!input.files || input.files.length === 0) return;
+      const file = input.files[0];
+      const dataUrl = await fileToDataUrl(file);
+
+      showToast('📸 Fotoğraf yükleniyor...');
+      try {
+        const res = await fetch('/api/upload', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            categoryId: catId,
+            filename: file.name,
+            dataUrl: dataUrl
+          })
+        });
+        const result = await res.json();
+        if (result.success) {
+          const prod = siteData.products.find(p => p.id === prodId);
+          if (prod) {
+            prod.image = result.imagePath;
+            await saveAllDataToServer();
+            renderCategoryProducts(selectedCategoryId);
+            showToast('✓ Ürünün fotoğrafı güncellendi!');
+          }
+        }
+      } catch (e) {
+        showToast('❌ Fotoğraf yüklenirken hata oluştu.');
+      }
+    }
+
+    // 7. Ürün Silme
+    async function deleteProduct(prodId) {
+      if (!confirm('Bu ürünü ve görsel bağlantısını silmek istediğinize emin misiniz?')) return;
+      siteData.products = siteData.products.filter(p => p.id !== prodId);
+      await saveAllDataToServer();
+      renderCategoryProducts(selectedCategoryId);
+      renderCategoryTabs();
+      showToast('✓ Ürün silindi.');
+    }
+
+    // 8. Ürün Düzenleme Modalı
+    function openEditModal(prodId) {
+      const prod = siteData.products.find(p => p.id === prodId);
+      if (!prod) return;
+
+      document.getElementById('editProdId').value = prod.id;
+      document.getElementById('editTitleTr').value = prod.titleTr || '';
+      document.getElementById('editTitleEn').value = prod.titleEn || '';
+      document.getElementById('editDescTr').value = prod.descTr || '';
+      document.getElementById('editDescEn').value = prod.descEn || '';
+      document.getElementById('editSpecsTr').value = (prod.specsTr || []).join(', ');
+      document.getElementById('editSpecsEn').value = (prod.specsEn || []).join(', ');
+
+      const preview = document.getElementById('editImagePreview');
+      if (prod.image && prod.image !== '') {
+        preview.src = `../${prod.image}`;
+        preview.style.display = 'block';
+      } else {
+        preview.src = '../images/logo-nilhome.jpg';
+      }
+
+      document.getElementById('editModal').classList.add('active');
+    }
+
+    document.getElementById('btnEditModalClose').onclick = () => document.getElementById('editModal').classList.remove('active');
+    document.getElementById('btnCancelEdit').onclick = () => document.getElementById('editModal').classList.remove('active');
+
+    document.getElementById('editProductForm').onsubmit = async (e) => {
+      e.preventDefault();
+      const id = document.getElementById('editProdId').value;
+      const prod = siteData.products.find(p => p.id === id);
+      if (!prod) return;
+
+      prod.titleTr = document.getElementById('editTitleTr').value.trim();
+      prod.titleEn = document.getElementById('editTitleEn').value.trim();
+      prod.descTr = document.getElementById('editDescTr').value.trim();
+      prod.descEn = document.getElementById('editDescEn').value.trim();
+      prod.specsTr = document.getElementById('editSpecsTr').value.split(',').map(s => s.trim()).filter(Boolean);
+      prod.specsEn = document.getElementById('editSpecsEn').value.split(',').map(s => s.trim()).filter(Boolean);
+
+      const fileInput = document.getElementById('editImageFileInput');
+      if (fileInput.files && fileInput.files.length > 0) {
+        const file = fileInput.files[0];
+        const dataUrl = await fileToDataUrl(file);
+        const res = await fetch('/api/upload', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            categoryId: prod.categoryId,
+            filename: file.name,
+            dataUrl: dataUrl
+          })
+        });
+        const result = await res.json();
+        if (result.success) {
+          prod.image = result.imagePath;
+        }
+      }
+
+      document.getElementById('editModal').classList.remove('active');
+      await saveAllDataToServer();
+      renderCategoryProducts(selectedCategoryId);
+      showToast('✓ Ürün başarıyla güncellendi!');
+    };
+
+    // 9. Yeni Ürün Ekle Formu
+    document.getElementById('btnOpenNewItemForCat').onclick = () => {
+      document.querySelector('[data-tab="tab-add-product"]').click();
+      document.getElementById('newProdCategory').value = selectedCategoryId;
+    };
+
+    document.getElementById('newProductForm').onsubmit = async (e) => {
+      e.preventDefault();
+      const catId = document.getElementById('newProdCategory').value;
+      const titleTr = document.getElementById('newProdTitleTr').value.trim();
+      const titleEn = document.getElementById('newProdTitleEn').value.trim();
+      const descTr = document.getElementById('newProdDescTr').value.trim();
+      const descEn = document.getElementById('newProdDescEn').value.trim();
+      const specsTr = document.getElementById('newProdSpecsTr').value.split(',').map(s => s.trim()).filter(Boolean);
+      const specsEn = document.getElementById('newProdSpecsEn').value.split(',').map(s => s.trim()).filter(Boolean);
+
+      let imagePath = '';
+      const fileInput = document.getElementById('newProdImageFile');
+      if (fileInput.files && fileInput.files.length > 0) {
+        const file = fileInput.files[0];
+        const dataUrl = await fileToDataUrl(file);
+        const res = await fetch('/api/upload', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            categoryId: catId,
+            filename: file.name,
+            dataUrl: dataUrl
+          })
+        });
+        const result = await res.json();
+        if (result.success) {
+          imagePath = result.imagePath;
+        }
+      }
+
+      const newProd = {
+        id: 'prod_' + Date.now(),
+        categoryId: catId,
+        titleTr,
+        titleEn,
+        descTr,
+        descEn,
+        specsTr,
+        specsEn,
+        image: imagePath,
+        badgeTr: 'Yeni Koleksiyon',
+        badgeEn: 'New Collection'
+      };
+
+      siteData.products.push(newProd);
+      await saveAllDataToServer();
+
+      document.getElementById('newProductForm').reset();
+      selectedCategoryId = catId;
+      document.querySelector('[data-tab="tab-categories"]').click();
+      renderCategoryProducts(catId);
+      renderCategoryTabs();
+      showToast('✓ Yeni ürün başarıyla eklendi!');
+    };
+
+    function populateCategorySelects() {
+      const select = document.getElementById('newProdCategory');
+      select.innerHTML = '';
+      siteData.categories.forEach(cat => {
+        const opt = document.createElement('option');
+        opt.value = cat.id;
+        opt.innerText = `${cat.icon} ${cat.nameTr} (${cat.nameEn})`;
+        select.appendChild(opt);
+      });
+    }
+
+    // 10. İletişim Bilgileri
+    function renderContactSettings() {
+      const s = siteData.settings;
+      if (!s) return;
+      document.getElementById('repName').value = s.representative.name || '';
+      document.getElementById('repEmail').value = s.representative.email || '';
+      document.getElementById('repPhone').value = s.representative.phone || '';
+      document.getElementById('repRoleTr').value = s.representative.roleTr || '';
+
+      document.getElementById('genEmail').value = s.generalEmail || '';
+      document.getElementById('webDomain').value = s.websiteDomain || '';
+      document.getElementById('facPhone').value = s.factoryPhone || '';
+      document.getElementById('instaUrl').value = s.instagramUrl || '';
+      document.getElementById('facAddrTr').value = s.factoryAddressTr || '';
+      document.getElementById('facAddrEn').value = s.factoryAddressEn || '';
+    }
+
+    document.getElementById('btnSaveContactSettings').onclick = async () => {
+      const s = siteData.settings;
+      s.representative.name = document.getElementById('repName').value.trim();
+      s.representative.email = document.getElementById('repEmail').value.trim();
+      s.representative.phone = document.getElementById('repPhone').value.trim();
+      s.representative.roleTr = document.getElementById('repRoleTr').value.trim();
+
+      s.generalEmail = document.getElementById('genEmail').value.trim();
+      s.websiteDomain = document.getElementById('webDomain').value.trim();
+      s.factoryPhone = document.getElementById('facPhone').value.trim();
+      s.instagramUrl = document.getElementById('instaUrl').value.trim();
+      s.factoryAddressTr = document.getElementById('facAddrTr').value.trim();
+      s.factoryAddressEn = document.getElementById('facAddrEn').value.trim();
+
+      await saveAllDataToServer();
+      showToast('✓ İletişim bilgileri kaydedildi!');
+    };
+
+    // 11. Banner Ayarları
+    function renderBannerSettings() {
+      const b = siteData.settings.noticeBanner;
+      if (!b) return;
+      document.getElementById('bannerTitleTr').value = b.titleTr || '';
+      document.getElementById('bannerTitleEn').value = b.titleEn || '';
+      document.getElementById('bannerDescTr').value = b.descTr || '';
+      document.getElementById('bannerDescEn').value = b.descEn || '';
+    }
+
+    document.getElementById('btnSaveBannerSettings').onclick = async () => {
+      const b = siteData.settings.noticeBanner;
+      b.titleTr = document.getElementById('bannerTitleTr').value.trim();
+      b.titleEn = document.getElementById('bannerTitleEn').value.trim();
+      b.descTr = document.getElementById('bannerDescTr').value.trim();
+      b.descEn = document.getElementById('bannerDescEn').value.trim();
+
+      await saveAllDataToServer();
+      showToast('✓ Banner metinleri kaydedildi!');
+    };
+
+    // 12. Yedek İndirme / Geri Yükleme
+    document.getElementById('btnDownloadBackup').onclick = () => {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(siteData, null, 2));
+      const a = document.createElement('a');
+      a.setAttribute("href", dataStr);
+      a.setAttribute("download", `nilteks_yedek_${new Date().toISOString().slice(0,10)}.json`);
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    };
+
+    document.getElementById('fileInputRestore').onchange = (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = async (event) => {
+        try {
+          siteData = JSON.parse(event.target.result);
+          await saveAllDataToServer();
+          renderUI();
+          showToast('✓ Yedek başarıyla geri yüklendi!');
+        } catch (err) {
+          alert('Geçersiz JSON dosyası!');
+        }
+      };
+      reader.readAsText(file);
+    };
+
+    // 13. Sunucuya Kaydetme Fonksiyonu
+    async function saveAllDataToServer() {
+      try {
+        const res = await fetch('/api/save', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(siteData)
+        });
+        const result = await res.json();
+        return result.success;
+      } catch (e) {
+        console.error('Kaydetme hatası:', e);
+        return false;
+      }
+    }
+
+    document.getElementById('btnSaveAllChanges').onclick = async () => {
+      const ok = await saveAllDataToServer();
+      if (ok) {
+        showToast('💾 Tüm değişiklikler web sitesine kaydedildi!');
+      } else {
+        showToast('⚠️ Sunucuya kaydedilemedi, yerel bağlantınızı kontrol edin.');
+      }
+    };
+
+    document.getElementById('btnRefreshData').onclick = () => {
+      loadData();
+      showToast('🔄 Veriler yenilendi.');
+    };
+
+    // 14. Sekme Değiştirici
+    document.querySelectorAll('.sidebar-nav .nav-item').forEach(btn => {
+      btn.onclick = () => {
+        document.querySelectorAll('.sidebar-nav .nav-item').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const tabId = btn.getAttribute('data-tab');
+        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+        document.getElementById(tabId).classList.add('active');
+
+        // Başlıkları güncelle
+        const titles = {
+          'tab-categories': ['Kategori & Görsel Yönetimi', '8 ana ürün grubunuza ait fotoğrafları yükleyebilir, düzenleyebilir ve silebilirsiniz.'],
+          'tab-add-product': ['Yeni Ürün Ekle', 'Kategori seçerek fotoğraf ve detaylarıyla yeni model ekleyin.'],
+          'tab-contact': ['İletişim & Firma Ayarları', 'Furkan Aydın ve Nil Tekstil genel iletişim bilgilerini yönetin.'],
+          'tab-banner': ['Duyuru & Banner', 'Koleksiyon duyuru metinlerini düzenleyin.'],
+          'tab-backup': ['Yedekleme & Sıfırlama', 'Site verilerinizi yedekleyin veya geri yükleyin.']
+        };
+        if (titles[tabId]) {
+          document.getElementById('pageHeading').innerText = titles[tabId][0];
+          document.getElementById('pageSubHeading').innerText = titles[tabId][1];
+        }
+      };
+    });
+
+    // 15. Fotoğrafı Otomatik Olarak 1200x1800 px (2:3 Dikey Katalog) Ebatına Optimize Et
+    function processImageTo1200x1800(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const img = new Image();
+          img.onload = () => {
+            const targetWidth = 1200;
+            const targetHeight = 1800;
+            const canvas = document.createElement('canvas');
+            canvas.width = targetWidth;
+            canvas.height = targetHeight;
+            const ctx = canvas.getContext('2d');
+
+            // Arka planı temiz beyaz ile doldur (PNG şeffaflıklarını düzeltir)
+            ctx.fillStyle = '#FFFFFF';
+            ctx.fillRect(0, 0, targetWidth, targetHeight);
+
+            // Cover math: 1200x1800 alanını bozmadan/uzatmadan ortalayarak doldur
+            const targetRatio = targetWidth / targetHeight; // 0.66667 (2:3)
+            const imgRatio = img.width / img.height;
+
+            let renderWidth, renderHeight, offsetX, offsetY;
+
+            if (imgRatio > targetRatio) {
+              // Görsel hedeften daha geniş: Yüksekliği sığdır, iki yandan dengeli ortala
+              renderHeight = targetHeight;
+              renderWidth = img.width * (targetHeight / img.height);
+              offsetX = (targetWidth - renderWidth) / 2;
+              offsetY = 0;
+            } else {
+              // Görsel hedeften daha dar veya eşit: Genişliği sığdır, üst-alttan ortala
+              renderWidth = targetWidth;
+              renderHeight = img.height * (targetWidth / img.width);
+              offsetX = 0;
+              offsetY = (targetHeight - renderHeight) / 2;
+            }
+
+            ctx.imageSmoothingEnabled = true;
+            ctx.imageSmoothingQuality = 'high';
+            ctx.drawImage(img, offsetX, offsetY, renderWidth, renderHeight);
+
+            // 1200x1800 yüksek kaliteli JPEG olarak dışa aktar
+            const dataUrl = canvas.toDataURL('image/jpeg', 0.92);
+            resolve(dataUrl);
+          };
+          img.onerror = () => {
+            resolve(e.target.result);
+          };
+          img.src = e.target.result;
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function fileToDataUrl(file) {
+      return processImageTo1200x1800(file);
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toastMsg').innerText = msg;
+      toast.classList.add('active');
+      setTimeout(() => toast.classList.remove('active'), 3200);
+    }
+
+    // Başlangıç
+    loadData();
+  </script>
+</body>
+</html>

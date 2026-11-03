@@ -1,0 +1,782 @@
+{
+  "settings": {
+    "companyName": "Nil Tekstil İplik Konf. San. ve Tic. Ltd. Şti.",
+    "websiteDomain": "niltex.com.tr",
+    "generalEmail": "info@niltex.com.tr",
+    "factoryPhone": "+90 (258) 241 72 99",
+    "factoryAddressTr": "Akçeşme Mah. 2606 Sok. No:6 Merkezefendi, Denizli / TÜRKİYE",
+    "factoryAddressEn": "Akçeşme Mah. 2606 Sok. No:6 Merkezefendi, Denizli / TURKEY",
+    "instagramUrl": "https://www.instagram.com/nil.textile/",
+    "representative": {
+      "name": "FURKAN AYDIN",
+      "roleTr": "Müşteri İlişkileri & İhracat / Satış",
+      "roleEn": "Client Relations & Export / Sales",
+      "phone": "+90 551 410 24 51",
+      "whatsapp": "+90 551 410 24 51",
+      "email": "furkan@niltex.com.tr"
+    },
+    "noticeBanner": {
+      "titleTr": "Özel Koleksiyon Görsellerimiz Güncellenmektedir",
+      "titleEn": "New Season Photography in Progress",
+      "descTr": "Yeni sezon ürün fotoğraflarımız kategori bazında sisteme işlenmektedir. Toptan sipariş, özel üretim veya teklif talepleriniz için bize hemen ulaşabilirsiniz.",
+      "descEn": "Our latest collection visual gallery is being updated category by category. For wholesale inquiries, custom OEM manufacturing, or private label pricing, please reach out directly."
+    }
+  },
+  "categories": [
+    {
+      "id": "mutfak-peceteleri",
+      "slug": "mutfak-peceteleri",
+      "nameTr": "Mutfak Peçeteleri",
+      "nameEn": "Kitchen Napkins",
+      "groupTr": "Mutfak Tekstili",
+      "groupEn": "Kitchen Linen",
+      "icon": "🍽️",
+      "folder": "images/categories/mutfak-peceteleri/"
+    },
+    {
+      "id": "mutfak-havlulari",
+      "slug": "mutfak-havlulari",
+      "nameTr": "Mutfak Havluları",
+      "nameEn": "Kitchen Towels",
+      "groupTr": "Mutfak Tekstili",
+      "groupEn": "Kitchen Linen",
+      "icon": "☕",
+      "folder": "images/categories/mutfak-havlulari/"
+    },
+    {
+      "id": "banyo-havlulari",
+      "slug": "banyo-havlulari",
+      "nameTr": "Banyo Havluları",
+      "nameEn": "Bath Towels",
+      "groupTr": "Banyo Tekstili",
+      "groupEn": "Bath Linen",
+      "icon": "🛁",
+      "folder": "images/categories/banyo-havlulari/"
+    },
+    {
+      "id": "bornozlar",
+      "slug": "bornozlar",
+      "nameTr": "Bornozlar",
+      "nameEn": "Bathrobes",
+      "groupTr": "Banyo & Spa",
+      "groupEn": "Bath & Spa",
+      "icon": "👘",
+      "folder": "images/categories/bornozlar/"
+    },
+    {
+      "id": "yatak-ortuleri",
+      "slug": "yatak-ortuleri",
+      "nameTr": "Yatak Örtüleri",
+      "nameEn": "Bedspreads",
+      "groupTr": "Yatak Odası",
+      "groupEn": "Bedding",
+      "icon": "🛏️",
+      "folder": "images/categories/yatak-ortuleri/"
+    },
+    {
+      "id": "pikeler",
+      "slug": "pikeler",
+      "nameTr": "Pikeler",
+      "nameEn": "Piques (Summer Blankets)",
+      "groupTr": "Yatak Odası",
+      "groupEn": "Bedding",
+      "icon": "🌿",
+      "folder": "images/categories/pikeler/"
+    },
+    {
+      "id": "pike-takimlari",
+      "slug": "pike-takimlari",
+      "nameTr": "Pike Takımları",
+      "nameEn": "Pique Sets",
+      "groupTr": "Yatak Odası",
+      "groupEn": "Bedding Sets",
+      "icon": "✨",
+      "folder": "images/categories/pike-takimlari/"
+    },
+    {
+      "id": "banyo-paspaslari",
+      "slug": "banyo-paspaslari",
+      "nameTr": "Banyo Paspasları",
+      "nameEn": "Bath Mats",
+      "groupTr": "Banyo Tekstili",
+      "groupEn": "Bath Linen",
+      "icon": "👣",
+      "folder": "images/categories/banyo-paspaslari/"
+    },
+    {
+      "id": "christmas",
+      "slug": "christmas",
+      "nameTr": "Christmas",
+      "nameEn": "Christmas",
+      "groupTr": "Özel Koleksiyon",
+      "groupEn": "Special Collection",
+      "icon": "🎄",
+      "folder": "images/categories/christmas/"
+    }
+  ],
+  "products": [
+    {
+      "id": "prod_2",
+      "categoryId": "mutfak-havlulari",
+      "titleTr": "Aura Series",
+      "titleEn": "Aura Series",
+      "descTr": "",
+      "descEn": "",
+      "specsTr": [
+        "%100 Pamuk & Tencel"
+      ],
+      "specsEn": [
+        "%100 Pamuk & Tencel"
+      ],
+      "image": "images/categories/mutfak-havlulari/image_20261015_111120-sol-alt-keye-de-bu-3-renkli-havluyu-st-ste-nizami.jpg",
+      "badgeTr": "Yeni Koleksiyon",
+      "badgeEn": "New Collection"
+    },
+    {
+      "id": "prod_3",
+      "categoryId": "banyo-havlulari",
+      "titleTr": "Waffle Bath Series",
+      "titleEn": "Waffle Bath Series",
+      "descTr": "",
+      "descEn": "",
+      "specsTr": [
+        "%100 Pamuk",
+        "Özel Dokuma"
+      ],
+      "specsEn": [
+        "%100 Pamuk",
+        "Özel Dokuma"
+      ],
+      "image": "images/categories/banyo-havlulari/pomelli_photoshoot_imafge_9_16_0411.png",
+      "badgeTr": "Yeni Koleksiyon",
+      "badgeEn": "New Collection"
+    },
+    {
+      "id": "prod_4",
+      "categoryId": "bornozlar",
+      "titleTr": "Leopard",
+      "titleEn": "Leopard",
+      "descTr": "",
+      "descEn": "",
+      "specsTr": [
+        "%100 Pamuk & Tencel"
+      ],
+      "specsEn": [
+        "%100 Pamuk & Tencel"
+      ],
+      "image": "images/categories/bornozlar/350214___Leopard_Shawl_Collar_Bathrobe_1.jpg",
+      "badgeTr": "Yeni Koleksiyon",
+      "badgeEn": "New Collection"
+    },
+    {
+      "id": "prod_5",
+      "categoryId": "yatak-ortuleri",
+      "titleTr": "Tropical Muslin",
+      "titleEn": "Tropical Muslin",
+      "descTr": "",
+      "descEn": "",
+      "specsTr": [
+        "Jakarlı Dokuma",
+        "Doğal Pastel Tonlar",
+        "Tek & Çift Kişilik"
+      ],
+      "specsEn": [
+        "Jacquard Relief Weave",
+        "Pastel Earth Tones",
+        "Twin",
+        "Queen & King"
+      ],
+      "image": "images/categories/yatak-ortuleri/3.jpg",
+      "badgeTr": "Yeni Koleksiyon",
+      "badgeEn": "New Collection"
+    },
+    {
+      "id": "prod_6",
+      "categoryId": "pikeler",
+      "titleTr": "Printed Pique",
+      "titleEn": "Printed Pique",
+      "descTr": "Yaz ve bahar aylarının vazgeçilmezi; hafif, serin tutan, hava sirkülasyonu sağlayan saf pamuk pikeler.",
+      "descEn": "The essential warm-weather coverlet; lightweight, cooling, natural airflow, and 100% breathable pure cotton knit weave.",
+      "specsTr": [
+        "%100 Pamuk",
+        "Waffle & Petek Örgü",
+        "160x220 / 220x240 cm"
+      ],
+      "specsEn": [
+        "100% Pure Cotton",
+        "Waffle Honeycomb Weave",
+        "160x220 / 220x240 cm"
+      ],
+      "image": "images/categories/pikeler/7.jpg",
+      "badgeTr": "Yeni Koleksiyon",
+      "badgeEn": "New Collection"
+    },
+    {
+      "id": "prod_7",
+      "categoryId": "pike-takimlari",
+      "titleTr": "Soft Pique Set",
+      "titleEn": "Soft Pique Set",
+      "descTr": "Uyumlu çarşaf ve yastık kılıflarıyla zenginleştirilmiş, hediyelik özel kutulu veya çanta ambalajlı setler.",
+      "descEn": "Coordinated ensembles including pique coverlet, matching bedsheets, and pillow shams, packaged in custom gift boxes.",
+      "specsTr": [
+        "Pike + Çarşaf + Kılıf",
+        "Ranforce / Saten Uyumlu",
+        "Özel Koleksiyon Ambalaj"
+      ],
+      "specsEn": [
+        "Pique + Sheet + 2 Shams",
+        "Ranforce / Sateen Finish",
+        "Retail & Gift Packaging"
+      ],
+      "image": "images/categories/pike-takimlari/1_krem_kopya.jpg",
+      "badgeTr": "Yeni Koleksiyon",
+      "badgeEn": "New Collection"
+    },
+    {
+      "id": "prod_8",
+      "categoryId": "banyo-paspaslari",
+      "titleTr": "Scloop Bath Mat",
+      "titleEn": "Scloop Bath Mat",
+      "descTr": "",
+      "descEn": "",
+      "specsTr": [],
+      "specsEn": [],
+      "image": "images/categories/banyo-paspaslari/Gemini_Generated_Image_b1gxcqb1gxcqb1gx.jpeg",
+      "badgeTr": "Yeni Koleksiyon",
+      "badgeEn": "New Collection"
+    },
+    {
+      "id": "prod_1793609976982",
+      "categoryId": "mutfak-peceteleri",
+      "titleTr": "Virgo",
+      "titleEn": "Virgo",
+      "descTr": "",
+      "descEn": "",
+      "specsTr": [
+        "Premium Cotton"
+      ],
+      "specsEn": [
+        "Premium Cotton"
+      ],
+      "image": "images/categories/mutfak-peceteleri/1.png",
+      "badgeTr": "Yeni Koleksiyon",
+      "badgeEn": "New Collection"
+    },
+    {
+      "id": "prod_1793610002354_0",
+      "categoryId": "mutfak-peceteleri",
+      "titleTr": "Müslin",
+      "titleEn": "Müslin",
+      "descTr": "",
+      "descEn": "",
+      "specsTr": [
+        "Premium Cotton"
+      ],
+      "specsEn": [
+        "Premium Cotton"
+      ],
+      "image": "images/categories/mutfak-peceteleri/1ana_2.jpg",
+      "badgeTr": "Yeni Koleksiyon",
+      "badgeEn": "New Collection"
+    },
+    {
+      "id": "prod_1793621771165_0",
+      "categoryId": "mutfak-peceteleri",
+      "titleTr": "Classy",
+      "titleEn": "Classy",
+      "descTr": "",
+      "descEn": "",
+      "specsTr": [
+        "Premium Cotton"
+      ],
+      "specsEn": [
+        "Premium Cotton"
+      ],
+      "image": "images/categories/mutfak-peceteleri/1_ana.jpg",
+      "badgeTr": "Yeni Koleksiyon",
+      "badgeEn": "New Collection"
+    },
+    {
+      "id": "prod_1793622028165_0",
+      "categoryId": "mutfak-peceteleri",
+      "titleTr": "Gabardin Fringed",
+      "titleEn": "Gabardin Fringed",
+      "descTr": "",
+      "descEn": "",
+      "specsTr": [
+        "Premium Cotton"
+      ],
+      "specsEn": [
+        "Premium Cotton"
+      ],
+      "image": "images/categories/mutfak-peceteleri/ggggg.jpg",
+      "badgeTr": "Yeni Koleksiyon",
+      "badgeEn": "New Collection"
+    },
+    {
+      "id": "prod_1793622102065_0",
+      "categoryId": "mutfak-peceteleri",
+      "titleTr": "Gabardin Printed",
+      "titleEn": "Gabardin Printed",
+      "descTr": "Mutfak Peçeteleri koleksiyonu yeni sezon modeli.",
+      "descEn": "Kitchen Napkins new season collection model.",
+      "specsTr": [
+        "Premium Cotton"
+      ],
+      "specsEn": [
+        "Premium Cotton"
+      ],
+      "image": "images/categories/mutfak-peceteleri/e2.png",
+      "badgeTr": "Yeni Koleksiyon",
+      "badgeEn": "New Collection"
+    },
+    {
+      "id": "prod_1793622153789_0",
+      "categoryId": "mutfak-peceteleri",
+      "titleTr": "Ruma Collection",
+      "titleEn": "Ruma Collection",
+      "descTr": "Lace Details",
+      "descEn": "Lace Details",
+      "specsTr": [
+        "Premium Cotton"
+      ],
+      "specsEn": [
+        "Premium Cotton"
+      ],
+      "image": "images/categories/mutfak-peceteleri/ChatGPT_Image_18_Haz_2026_21_52_42.png",
+      "badgeTr": "Yeni Koleksiyon",
+      "badgeEn": "New Collection"
+    },
+    {
+      "id": "prod_1793622250206_0",
+      "categoryId": "mutfak-peceteleri",
+      "titleTr": "Bouquet Series",
+      "titleEn": "Bouquet Series",
+      "descTr": "",
+      "descEn": "",
+      "specsTr": [
+        "Premium Cotton"
+      ],
+      "specsEn": [
+        "Premium Cotton"
+      ],
+      "image": "images/categories/mutfak-peceteleri/ana.png",
+      "badgeTr": "Yeni Koleksiyon",
+      "badgeEn": "New Collection"
+    },
+    {
+      "id": "prod_1793622816272_0",
+      "categoryId": "mutfak-peceteleri",
+      "titleTr": "Jacguard",
+      "titleEn": "Jacguard",
+      "descTr": "",
+      "descEn": "",
+      "specsTr": [
+        "Premium Cotton"
+      ],
+      "specsEn": [
+        "Premium Cotton"
+      ],
+      "image": "images/categories/mutfak-peceteleri/1_ana.jpeg",
+      "badgeTr": "Yeni Koleksiyon",
+      "badgeEn": "New Collection"
+    },
+    {
+      "id": "prod_1793623004181_0",
+      "categoryId": "mutfak-peceteleri",
+      "titleTr": "Autumn",
+      "titleEn": "Autumn",
+      "descTr": "",
+      "descEn": "",
+      "specsTr": [
+        "Premium Cotton"
+      ],
+      "specsEn": [
+        "Premium Cotton"
+      ],
+      "image": "images/categories/mutfak-peceteleri/ChatGPT_Go_rseli_26_Eyl_2026_13_43_11.png",
+      "badgeTr": "Yeni Koleksiyon",
+      "badgeEn": "New Collection"
+    },
+    {
+      "id": "prod_1793623075343_0",
+      "categoryId": "mutfak-peceteleri",
+      "titleTr": "Quality Series",
+      "titleEn": "Quality Series",
+      "descTr": "",
+      "descEn": "",
+      "specsTr": [
+        "Premium Cotton"
+      ],
+      "specsEn": [
+        "Premium Cotton"
+      ],
+      "image": "images/categories/mutfak-peceteleri/pomelli_photoshoot_image_9_16_0512__1_.png",
+      "badgeTr": "Yeni Koleksiyon",
+      "badgeEn": "New Collection"
+    },
+    {
+      "id": "prod_1793623191181_0",
+      "categoryId": "mutfak-peceteleri",
+      "titleTr": "Lemon",
+      "titleEn": "Lemon",
+      "descTr": "",
+      "descEn": "",
+      "specsTr": [
+        "Premium Cotton"
+      ],
+      "specsEn": [
+        "Premium Cotton"
+      ],
+      "image": "images/categories/mutfak-peceteleri/fgfhgh.png",
+      "badgeTr": "Yeni Koleksiyon",
+      "badgeEn": "New Collection"
+    },
+    {
+      "id": "prod_1793623357955_0",
+      "categoryId": "mutfak-peceteleri",
+      "titleTr": "Classy",
+      "titleEn": "Classy",
+      "descTr": "",
+      "descEn": "",
+      "specsTr": [
+        "Premium Cotton"
+      ],
+      "specsEn": [
+        "Premium Cotton"
+      ],
+      "image": "images/categories/mutfak-peceteleri/unnamed__4_.jpg",
+      "badgeTr": "Yeni Koleksiyon",
+      "badgeEn": "New Collection"
+    },
+    {
+      "id": "prod_1793623450054_0",
+      "categoryId": "banyo-havlulari",
+      "titleTr": "Waffle Bath Series",
+      "titleEn": "Waffle Bath Series",
+      "descTr": "Banyo Havluları koleksiyonu yeni sezon modeli.",
+      "descEn": "Bath Towels new season collection model.",
+      "specsTr": [
+        "%100 Pamuk",
+        "Özel Dokuma"
+      ],
+      "specsEn": [
+        "100% Cotton",
+        "Custom Weave"
+      ],
+      "image": "images/categories/banyo-havlulari/IMG_6625.PNG",
+      "badgeTr": "Yeni Koleksiyon",
+      "badgeEn": "New Collection"
+    },
+    {
+      "id": "prod_1793623466513_0",
+      "categoryId": "banyo-havlulari",
+      "titleTr": "Waffle Bath Series",
+      "titleEn": "Waffle Bath Series",
+      "descTr": "",
+      "descEn": "",
+      "specsTr": [
+        "%100 Pamuk",
+        "Özel Dokuma"
+      ],
+      "specsEn": [
+        "100% Cotton",
+        "Custom Weave"
+      ],
+      "image": "images/categories/banyo-havlulari/IMG_6647.PNG",
+      "badgeTr": "Yeni Koleksiyon",
+      "badgeEn": "New Collection"
+    },
+    {
+      "id": "prod_1793623523784_0",
+      "categoryId": "banyo-havlulari",
+      "titleTr": "Serena Collection",
+      "titleEn": "Serena Collection",
+      "descTr": "",
+      "descEn": "",
+      "specsTr": [
+        "%100 Pamuk",
+        "Özel Dokuma"
+      ],
+      "specsEn": [
+        "100% Cotton",
+        "Custom Weave"
+      ],
+      "image": "images/categories/banyo-havlulari/978899-Bath-Towels-Sonoma-Turkish-Cotton-Essential-Set-Dune-Beige-web-2678.webp",
+      "badgeTr": "Yeni Koleksiyon",
+      "badgeEn": "New Collection"
+    },
+    {
+      "id": "prod_1793623603054_0",
+      "categoryId": "banyo-havlulari",
+      "titleTr": "Guara",
+      "titleEn": "Guara",
+      "descTr": "",
+      "descEn": "",
+      "specsTr": [
+        "%100 Pamuk"
+      ],
+      "specsEn": [
+        "100% Cotton"
+      ],
+      "image": "images/categories/banyo-havlulari/yd_pe26_gaura_eponges_ambiance.jpg",
+      "badgeTr": "Yeni Koleksiyon",
+      "badgeEn": "New Collection"
+    },
+    {
+      "id": "prod_1793623667645_0",
+      "categoryId": "banyo-havlulari",
+      "titleTr": "Aura",
+      "titleEn": "Aura",
+      "descTr": "",
+      "descEn": "",
+      "specsTr": [
+        "%100 Pamuk",
+        "Özel Dokuma"
+      ],
+      "specsEn": [
+        "100% Cotton",
+        "Custom Weave"
+      ],
+      "image": "images/categories/banyo-havlulari/1.jpg",
+      "badgeTr": "Yeni Koleksiyon",
+      "badgeEn": "New Collection"
+    },
+    {
+      "id": "prod_1793623769253_0",
+      "categoryId": "bornozlar",
+      "titleTr": "Plush",
+      "titleEn": "Plush",
+      "descTr": "Bornozlar koleksiyonu yeni sezon modeli.",
+      "descEn": "Bathrobes new season collection model.",
+      "specsTr": [
+        "%100 Pamuk",
+        "Özel Dokuma"
+      ],
+      "specsEn": [
+        "100% Cotton",
+        "Custom Weave"
+      ],
+      "image": "images/categories/bornozlar/DustyRose_Turkish_UltraPlush_BathRobe_Stack_DiMartino_11102025_FINAL.webp",
+      "badgeTr": "Yeni Koleksiyon",
+      "badgeEn": "New Collection"
+    },
+    {
+      "id": "prod_1793623789147_0",
+      "categoryId": "bornozlar",
+      "titleTr": "Plush",
+      "titleEn": "Plush",
+      "descTr": "Bornozlar koleksiyonu yeni sezon modeli.",
+      "descEn": "Bathrobes new season collection model.",
+      "specsTr": [
+        "%100 Pamuk",
+        "Özel Dokuma"
+      ],
+      "specsEn": [
+        "100% Cotton",
+        "Custom Weave"
+      ],
+      "image": "images/categories/bornozlar/Turkish_Ultra_Plush_Robes_0190_FINAL_89f71eba-cd01-44d8-88e8-77f4d10e2230.webp",
+      "badgeTr": "Yeni Koleksiyon",
+      "badgeEn": "New Collection"
+    },
+    {
+      "id": "prod_1793623814793_0",
+      "categoryId": "bornozlar",
+      "titleTr": "Waffle Bathrobe",
+      "titleEn": "Waffle Bathrobe",
+      "descTr": "",
+      "descEn": "",
+      "specsTr": [
+        "%100 Pamuk",
+        "Özel Dokuma"
+      ],
+      "specsEn": [
+        "100% Cotton",
+        "Custom Weave"
+      ],
+      "image": "images/categories/bornozlar/Ads_z_tasar_m__11_.png",
+      "badgeTr": "Yeni Koleksiyon",
+      "badgeEn": "New Collection"
+    },
+    {
+      "id": "prod_1793623820605_0",
+      "categoryId": "bornozlar",
+      "titleTr": "Waffle Bathrobe",
+      "titleEn": "Waffle Bathrobe",
+      "descTr": "",
+      "descEn": "",
+      "specsTr": [
+        "%100 Pamuk",
+        "Özel Dokuma"
+      ],
+      "specsEn": [
+        "100% Cotton",
+        "Custom Weave"
+      ],
+      "image": "images/categories/bornozlar/h.png",
+      "badgeTr": "Yeni Koleksiyon",
+      "badgeEn": "New Collection"
+    },
+    {
+      "id": "prod_1793624346021_0",
+      "categoryId": "pikeler",
+      "titleTr": "Looma Knit Pattern",
+      "titleEn": "Looma Knit Pattern",
+      "descTr": "Pikeler koleksiyonu yeni sezon modeli.",
+      "descEn": "Piques (Summer Blankets) new season collection model.",
+      "specsTr": [
+        "%100 Pamuk",
+        "Özel Dokuma"
+      ],
+      "specsEn": [
+        "100% Cotton",
+        "Custom Weave"
+      ],
+      "image": "images/categories/pikeler/3.jpg",
+      "badgeTr": "Yeni Koleksiyon",
+      "badgeEn": "New Collection"
+    },
+    {
+      "id": "prod_1793624386112_0",
+      "categoryId": "pikeler",
+      "titleTr": "Perla Diamond",
+      "titleEn": "Perla Diamond",
+      "descTr": "",
+      "descEn": "",
+      "specsTr": [
+        "%100 Pamuk",
+        "Özel Dokuma"
+      ],
+      "specsEn": [
+        "100% Cotton",
+        "Custom Weave"
+      ],
+      "image": "images/categories/pikeler/1.jpg",
+      "badgeTr": "Yeni Koleksiyon",
+      "badgeEn": "New Collection"
+    },
+    {
+      "id": "prod_1793624475930_0",
+      "categoryId": "pikeler",
+      "titleTr": "Waffle NOA",
+      "titleEn": "Waffle NOA",
+      "descTr": "",
+      "descEn": "",
+      "specsTr": [
+        "%100 Pamuk",
+        "Özel Dokuma"
+      ],
+      "specsEn": [
+        "100% Cotton",
+        "Custom Weave"
+      ],
+      "image": "images/categories/pikeler/4.png",
+      "badgeTr": "Yeni Koleksiyon",
+      "badgeEn": "New Collection"
+    },
+    {
+      "id": "prod_1793624766663_0",
+      "categoryId": "banyo-paspaslari",
+      "titleTr": "Scloop Bath Mat",
+      "titleEn": "Scloop Bath Mat",
+      "descTr": "Banyo Paspasları koleksiyonu yeni sezon modeli.",
+      "descEn": "Bath Mats new season collection model.",
+      "specsTr": [
+        "%100 Pamuk",
+        "Özel Dokuma"
+      ],
+      "specsEn": [
+        "100% Cotton",
+        "Custom Weave"
+      ],
+      "image": "images/categories/banyo-paspaslari/Gu_nes_li_Banyoda_Scallop_Kenarl__Hal_lar.png",
+      "badgeTr": "Yeni Koleksiyon",
+      "badgeEn": "New Collection"
+    },
+    {
+      "id": "prod_christmas_1",
+      "categoryId": "christmas",
+      "titleTr": "Christmas Series",
+      "titleEn": "Christmas Series",
+      "descTr": "Yılbaşına özel tematik nakış ve jakarlı desenlerle tasarlanmış mutfak ve ev tekstili koleksiyonu.",
+      "descEn": "Holiday-themed embroidered and jacquard kitchen linens and home textiles.",
+      "specsTr": [
+        "Premium Cotton",
+        "Özel Nakışlı",
+        "Yılbaşı Koleksiyonu"
+      ],
+      "specsEn": [
+        "Premium Cotton",
+        "Custom Embroidery",
+        "Holiday Collection"
+      ],
+      "image": "images/categories/christmas/Gemini_Generated_Image_z8c6udz8c6udz8c6.jpeg",
+      "badgeTr": "Yeni Koleksiyon",
+      "badgeEn": "Holiday Special"
+    },
+    {
+      "id": "prod_1793625413865_0",
+      "categoryId": "christmas",
+      "titleTr": "Gingerbread Collection",
+      "titleEn": "Gingerbread Collection",
+      "descTr": "Christmas koleksiyonu yeni sezon modeli.",
+      "descEn": "Christmas new season collection model.",
+      "specsTr": [
+        "Premium Cotton",
+        "Özel Nakışlı",
+        "Yılbaşı Koleksiyonu"
+      ],
+      "specsEn": [
+        "Premium Cotton",
+        "Custom Embroidery",
+        "Holiday Collection"
+      ],
+      "image": "images/categories/christmas/32cf7a46-8c12-478c-bfdb-37bc15b5c7c2.png",
+      "badgeTr": "Yeni Koleksiyon",
+      "badgeEn": "New Collection"
+    },
+    {
+      "id": "prod_1793625463209_0",
+      "categoryId": "christmas",
+      "titleTr": "Merlin Christmas",
+      "titleEn": "Merlin Christmas",
+      "descTr": "Christmas koleksiyonu yeni sezon modeli.",
+      "descEn": "Christmas new season collection model.",
+      "specsTr": [
+        "Premium Cotton",
+        "Özel Nakışlı",
+        "Yılbaşı Koleksiyonu"
+      ],
+      "specsEn": [
+        "Premium Cotton",
+        "Custom Embroidery",
+        "Holiday Collection"
+      ],
+      "image": "images/categories/christmas/ChatGPT_Image_23_Eyl_2026_12_24_12.png",
+      "badgeTr": "Yeni Koleksiyon",
+      "badgeEn": "New Collection"
+    },
+    {
+      "id": "prod_1793625511816_0",
+      "categoryId": "christmas",
+      "titleTr": "Classy",
+      "titleEn": "Classy",
+      "descTr": "Christmas koleksiyonu yeni sezon modeli.",
+      "descEn": "Christmas new season collection model.",
+      "specsTr": [
+        "Premium Cotton",
+        "Özel Nakışlı",
+        "Yılbaşı Koleksiyonu"
+      ],
+      "specsEn": [
+        "Premium Cotton",
+        "Custom Embroidery",
+        "Holiday Collection"
+      ],
+      "image": "images/categories/christmas/ChatGPT_Image_23_Eyl_2026_12_16_36.png",
+      "badgeTr": "Yeni Koleksiyon",
+      "badgeEn": "New Collection"
+    }
+  ]
+}
