@@ -760,23 +760,6 @@
       "image": "images/categories/christmas/ChatGPT_Image_23_Eyl_2026_12_16_36.png",
       "badgeTr": "Yeni Koleksiyon",
       "badgeEn": "New Collection"
-    },
-    {
-      "id": "prod_1794129767172",
-      "categoryId": "bornozlar",
-      "titleTr": "Diamond",
-      "titleEn": "Diamond",
-      "descTr": "",
-      "descEn": "",
-      "specsTr": [
-        "%100 Cotton"
-      ],
-      "specsEn": [
-        "%100 Cotton"
-      ],
-      "image": "images/categories/bornozlar/ekruborn.jpg",
-      "badgeTr": "Yeni Koleksiyon",
-      "badgeEn": "New Collection"
     }
   ]
 }
