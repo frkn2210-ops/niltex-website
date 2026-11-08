@@ -1834,3 +1834,386 @@ textarea.form-control {
     right: 20px;
   }
 }
+
+/* ==========================================================================
+   TRENDYOL & INSTAGRAM BÖLÜMLERİ
+   ========================================================================== */
+
+/* Trendyol Section */
+.trendyol-banner {
+  background: linear-gradient(135deg, #FFFDFB 0%, #FFF7EE 50%, #FAF3EA 100%);
+  border: 1px solid rgba(242, 122, 26, 0.22);
+  border-radius: var(--radius-xl);
+  padding: 50px 44px;
+  box-shadow: var(--shadow-card);
+  position: relative;
+  overflow: hidden;
+}
+
+.trendyol-banner::after {
+  content: "";
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 260px;
+  height: 260px;
+  background: radial-gradient(circle, rgba(242, 122, 26, 0.09) 0%, transparent 70%);
+  pointer-events: none;
+  border-radius: 50%;
+}
+
+.trendyol-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.trendyol-badge-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #FFF0E5;
+  color: #D35400;
+  padding: 6px 16px;
+  border-radius: var(--radius-full);
+  font-size: 0.88rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  border: 1px solid rgba(242, 122, 26, 0.25);
+}
+
+.trendyol-title {
+  font-family: var(--font-serif);
+  font-size: 2.3rem;
+  color: var(--color-text-main);
+  line-height: 1.25;
+  margin-bottom: 16px;
+}
+
+.trendyol-title span {
+  color: #F27A1A;
+}
+
+.trendyol-desc {
+  font-size: 1.05rem;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+.trendyol-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: #F27A1A;
+  color: #FFFFFF !important;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 14px 30px;
+  border-radius: var(--radius-full);
+  box-shadow: 0 10px 24px rgba(242, 122, 26, 0.28);
+  transition: var(--transition);
+}
+
+.trendyol-btn:hover {
+  background: #E06708;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(242, 122, 26, 0.36);
+  color: #FFFFFF !important;
+}
+
+.trendyol-btn svg {
+  fill: currentColor;
+}
+
+/* Trendyol Stats Card */
+.trendyol-card {
+  background: #FFFFFF;
+  border-radius: var(--radius-lg);
+  padding: 32px 28px;
+  border: 1px solid rgba(229, 223, 213, 0.8);
+  box-shadow: var(--shadow-subtle);
+  position: relative;
+}
+
+.trendyol-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--color-border-light);
+  padding-bottom: 16px;
+  margin-bottom: 20px;
+}
+
+.trendyol-store-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.trendyol-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #FAF8F5;
+  border: 2px solid #F27A1A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  color: #F27A1A;
+  font-size: 1.1rem;
+}
+
+.trendyol-store-name {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--color-text-main);
+  line-height: 1.2;
+}
+
+.trendyol-store-tag {
+  font-size: 0.8rem;
+  color: #27AE60;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.trendyol-metrics-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.trendyol-metric-box {
+  background: #FAF8F5;
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  text-align: center;
+}
+
+.trendyol-metric-val {
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: #F27A1A;
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+
+.trendyol-metric-label {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+
+.trendyol-trust-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.trendyol-trust-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.88rem;
+  color: var(--color-text-main);
+}
+
+.trendyol-trust-item span.icon {
+  color: #27AE60;
+  font-weight: bold;
+}
+
+/* Instagram Section */
+.instagram-wrap {
+  margin-top: 10px;
+}
+
+.instagram-header-box {
+  background: #FFFFFF;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  padding: 24px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  box-shadow: var(--shadow-subtle);
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.instagram-profile {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.instagram-avatar-ring {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  padding: 3px;
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.instagram-avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #FFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.instagram-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.instagram-meta h3 {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--color-text-main);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.instagram-handle {
+  font-size: 0.95rem;
+  color: #C13584;
+  font-weight: 700;
+}
+
+.instagram-bio {
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+  margin-top: 4px;
+}
+
+.instagram-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  color: #FFFFFF !important;
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 12px 26px;
+  border-radius: var(--radius-full);
+  box-shadow: 0 8px 20px rgba(220, 39, 67, 0.25);
+  transition: var(--transition);
+}
+
+.instagram-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 26px rgba(220, 39, 67, 0.35);
+  color: #FFFFFF !important;
+}
+
+.instagram-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.instagram-item {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--color-sand-light);
+  box-shadow: var(--shadow-subtle);
+  border: 1px solid var(--color-border);
+  display: block;
+}
+
+.instagram-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.instagram-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(44, 41, 38, 0.45);
+  backdrop-filter: blur(2px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: var(--transition);
+  color: #FFFFFF;
+  padding: 16px;
+  text-align: center;
+}
+
+.instagram-item:hover .instagram-overlay {
+  opacity: 1;
+}
+
+.instagram-item:hover img {
+  transform: scale(1.06);
+}
+
+.instagram-overlay-icon {
+  font-size: 1.8rem;
+  margin-bottom: 6px;
+}
+
+.instagram-overlay-text {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #FFFFFF;
+}
+
+@media (max-width: 992px) {
+  .trendyol-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .instagram-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .trendyol-banner {
+    padding: 32px 20px;
+  }
+  .trendyol-title {
+    font-size: 1.8rem;
+  }
+  .instagram-header-box {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .instagram-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .instagram-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+}
