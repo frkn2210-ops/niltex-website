@@ -221,7 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
         card.innerHTML = `
           <div class="product-card-image">
             ${hasImg 
-              ? `<img src="${p.image}" alt="${title}" loading="lazy">`
+              ? `<img src="${p.image}" alt="${title}" loading="lazy" onerror="if (!this.dataset.triedGh) { this.dataset.triedGh='1'; this.src='https://raw.githubusercontent.com/frkn2210-ops/niltex-website/main/' + this.getAttribute('src'); }">`
               : `<div class="placeholder-visual">
                    <div class="placeholder-pattern"></div>
                    <div class="placeholder-icon">${cat.icon}</div>

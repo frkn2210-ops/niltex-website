@@ -1139,6 +1139,12 @@
           </ol>
         </div>
 
+        <!-- İpucu: Vercel Tek Seferlik Kurulum -->
+        <div style="background: #EDF2F7; border: 1px solid #CBD5E0; border-radius: var(--radius-sm); padding: 12px 16px; margin-bottom: 20px; font-size: 0.80rem; line-height: 1.5; color: #4A5568;">
+          <strong style="color: #2D3748;">✨ Kalıcı Otomatik Bulut Seçeneği:</strong><br>
+          Bu anahtarı Vercel Kontrol Panelinizde (<strong>Settings &rarr; Environment Variables</strong>) <code>GITHUB_TOKEN</code> adıyla bir kez eklerseniz, hiçbir cihazda anahtar girmeniz gerekmez; sistem tüm tarayıcılarda 7/24 tamamen otomatik çalışır!
+        </div>
+
         <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px;">
           <button type="button" class="btn btn-secondary" onclick="handleForgetCloudToken()" style="color: #E53E3E;" id="btnForgetToken">
             Anahtarı Sıfırla
@@ -1288,27 +1294,71 @@
       const token = getCloudToken();
       updateCloudUI(!!token);
 
+      let loaded = false;
+
+      // 1. Önce doğrudan GitHub API'den en güncel canlı veriyi al (Vercel CDN derleme gecikmesini sıfırlar)
       try {
-        const res = await fetch('/data/site-data.json?t=' + Date.now(), { cache: 'no-store' });
-        if (!res.ok) throw new Error('data/site-data.json okunamadı');
-        siteData = await res.json();
-      } catch (e) {
-        console.warn('Veri dosyası okunamadı, yerel ../data/site-data.json deneniyor...', e);
+        const headers = { 'Accept': 'application/vnd.github.v3+json' };
+        if (token) headers['Authorization'] = `Bearer ${token}`;
+
+        const ghRes = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/data/site-data.json?ref=${GITHUB_BRANCH}&t=${Date.now()}`, {
+          headers,
+          cache: 'no-store'
+        });
+
+        if (ghRes.ok) {
+          const ghJson = await ghRes.json();
+          if (ghJson.content) {
+            const raw = base64ToUtf8(ghJson.content.replace(/\n/g, ''));
+            siteData = JSON.parse(raw);
+            loaded = true;
+          }
+        }
+      } catch (eGh) {
+        console.warn('GitHub API canlı veri okunamadı, Vercel deneniyor...', eGh);
+      }
+
+      // 2. Yedek olarak Vercel statik dosyasından veya yerel sunucudan oku
+      if (!loaded) {
         try {
-          const res = await fetch('../data/site-data.json');
+          const res = await fetch('/data/site-data.json?t=' + Date.now(), { cache: 'no-store' });
+          if (!res.ok) throw new Error('data/site-data.json okunamadı');
           siteData = await res.json();
-        } catch (err2) {
-          console.error('Yedek JSON da okunamadı:', err2);
+          loaded = true;
+        } catch (e) {
+          console.warn('Veri dosyası okunamadı, yerel ../data/site-data.json deneniyor...', e);
+          try {
+            const res = await fetch('../data/site-data.json?t=' + Date.now(), { cache: 'no-store' });
+            siteData = await res.json();
+            loaded = true;
+          } catch (err2) {
+            console.error('Yedek JSON da okunamadı:', err2);
+          }
         }
       }
 
       if (token) {
         updateServerStatus(true, '🟢 7/24 Bulut Sistemi Aktif');
       } else {
-        updateServerStatus(false, '🔑 7/24 Bulut Anahtarı Girin');
+        checkBackendSyncStatus();
       }
 
       renderUI();
+    }
+
+    async function checkBackendSyncStatus() {
+      try {
+        const res = await fetch('/api/sync');
+        if (res.ok) {
+          const data = await res.json();
+          if (data.success) {
+            updateServerStatus(true, '🟢 7/24 Bulut Sistemi Aktif (Vercel)');
+            updateCloudUI(true);
+            return;
+          }
+        }
+      } catch (e) {}
+      updateServerStatus(false, '🔑 7/24 Bulut Anahtarı Girin');
     }
 
     // 2. Tüm UI'yı Çiz
@@ -1377,7 +1427,7 @@
         card.innerHTML = `
           <div class="card-thumb-wrapper">
             ${hasImg 
-              ? `<img src="${imgSrc}" alt="${p.titleTr}" onerror="this.src='../images/logo-nilhome.jpg'">`
+              ? `<img src="${imgSrc}" alt="${p.titleTr}" onerror="if (!this.dataset.fallbackTried) { this.dataset.fallbackTried = '1'; this.src = 'https://raw.githubusercontent.com/${GITHUB_REPO}/${GITHUB_BRANCH}/${p.image}?t=' + Date.now(); } else { this.src = '../images/logo-nilhome.jpg'; }">`
               : `<div class="thumb-placeholder">
                   <div style="font-size: 2rem;">📷</div>
                   <span style="font-size: 0.75rem; font-weight: 700;">Görsel Bekleniyor</span>
@@ -1605,6 +1655,14 @@
       const preview = document.getElementById('editImagePreview');
       if (prod.image && prod.image !== '') {
         preview.src = `../${prod.image}`;
+        preview.onerror = function() {
+          if (!this.dataset.fallbackTried && prod.image) {
+            this.dataset.fallbackTried = '1';
+            this.src = `https://raw.githubusercontent.com/${GITHUB_REPO}/${GITHUB_BRANCH}/${prod.image}?t=` + Date.now();
+          } else {
+            this.src = '../images/logo-nilhome.jpg';
+          }
+        };
         preview.style.display = 'block';
       } else {
         preview.src = '../images/logo-nilhome.jpg';
