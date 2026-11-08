@@ -764,8 +764,8 @@
     {
       "id": "prod_1794129660194_0",
       "categoryId": "bornozlar",
-      "titleTr": "bornoz model krem 1200x1800 grseldeki hibir detay bozmadan sadece mankenin ban",
-      "titleEn": "bornoz model krem 1200x1800 grseldeki hibir detay bozmadan sadece mankenin ban",
+      "titleTr": "Diamond",
+      "titleEn": "Diamond",
       "descTr": "Bornozlar koleksiyonu yeni sezon modeli.",
       "descEn": "Bathrobes new season collection model.",
       "specsTr": [
@@ -776,7 +776,7 @@
         "100% Cotton",
         "Custom Weave"
       ],
-      "image": "images/categories/bornozlar/_STRIPPED_78_bytes_-ilk-grseldeki-hibir-detay-bozmadan-bornoz-ve-sa-ha-bu-tonla-ayn-olsun.jpg",
+      "image": "images/categories/bornozlar/ekruborn.jpg",
       "badgeTr": "Yeni Koleksiyon",
       "badgeEn": "New Collection"
     }
