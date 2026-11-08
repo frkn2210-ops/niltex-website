@@ -1,4 +1,12 @@
 // api/save.js - Nilteks 7/24 Vercel & GitHub Bulut Kayıt Servisi
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: '25mb',
+    },
+  },
+};
+
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
@@ -16,7 +24,7 @@ export default async function handler(req, res) {
   if (!token) {
     return res.status(401).json({ 
       success: false, 
-      error: 'GitHub Erişim Anahtarı (Token) eksik. Lütfen panelden anahtarınızı giriniz.' 
+      error: 'GitHub Erişim Anahtarı (Token) eksik. Lütfen panelden anahtarınızı giriniz veya Vercel ayarlarına GITHUB_TOKEN ekleyiniz.' 
     });
   }
 

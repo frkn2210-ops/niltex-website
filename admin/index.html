@@ -2039,8 +2039,8 @@
             ctx.imageSmoothingQuality = 'high';
             ctx.drawImage(img, offsetX, offsetY, renderWidth, renderHeight);
 
-            // 1200x1800 yüksek kaliteli JPEG olarak dışa aktar
-            const dataUrl = canvas.toDataURL('image/jpeg', 0.92);
+            // 1200x1800 optimize edilmiş yüksek kaliteli JPEG olarak dışa aktar (~350 KB)
+            const dataUrl = canvas.toDataURL('image/jpeg', 0.82);
             resolve(dataUrl);
           };
           img.onerror = () => {
