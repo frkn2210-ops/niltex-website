@@ -152,23 +152,6 @@
       "badgeEn": "New Collection"
     },
     {
-      "id": "prod_4",
-      "categoryId": "bornozlar",
-      "titleTr": "Leopard",
-      "titleEn": "Leopard",
-      "descTr": "",
-      "descEn": "",
-      "specsTr": [
-        "%100 Pamuk & Tencel"
-      ],
-      "specsEn": [
-        "%100 Pamuk & Tencel"
-      ],
-      "image": "images/categories/bornozlar/350214___Leopard_Shawl_Collar_Bathrobe_1.jpg",
-      "badgeTr": "Yeni Koleksiyon",
-      "badgeEn": "New Collection"
-    },
-    {
       "id": "prod_5",
       "categoryId": "yatak-ortuleri",
       "titleTr": "Tropical Muslin",
