@@ -745,6 +745,18 @@
     </nav>
 
     <div class="sidebar-footer">
+      <!-- 7/24 Bulut Durum Kutusu -->
+      <div id="cloudUserStatus" style="margin-bottom: 12px; padding: 10px 14px; background: rgba(255,255,255,0.06); border-radius: var(--radius-sm); font-size: 0.78rem; border: 1px solid rgba(255,255,255,0.1);">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+          <span style="color: #A8A196;">Bulut Durumu:</span>
+          <span id="cloudStatusBadge" style="font-weight: 700; color: #48BB78;">● 7/24 Aktif</span>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+          <span id="cloudAccountText" style="color: #E5DFD5; font-size: 0.75rem;">@frkn2210-ops</span>
+          <a href="#" onclick="openCloudAuthModal(); return false;" style="color: #E5DFD5; font-size: 0.75rem; text-decoration: underline; font-weight: 600;">Anahtar Ayarı</a>
+        </div>
+      </div>
+
       <div class="preview-btns">
         <a href="/" target="_blank" class="btn-preview">
           <span>🇹🇷</span>
@@ -760,37 +772,27 @@
 
   <!-- SAĞ ANA İÇERİK ALANI -->
   <main class="main-wrapper">
-    <!-- CANLI / DOSYA UYARI BANNERI -->
-    <div id="envNoticeBanner" style="display:none; background: #FFF8E6; border-bottom: 2px solid #F0B429; padding: 14px 36px; color: #7B341E; font-size: 0.88rem; align-items: center; justify-content: space-between; gap: 16px; z-index: 100;">
-      <div style="display: flex; align-items: center; gap: 12px;">
-        <span style="font-size: 1.4rem;">⚠️</span>
-        <span id="envNoticeText">
-          <strong>Dikkat:</strong> Şu anda canlı sitedesiniz. Vercel statik barındırma sunduğu için değişiklikler doğrudan canlı siteden kaydedilemez. Değişiklik yapmak için bilgisayarınızdaki <strong>Admin_Paneli_Baslat.command</strong> dosyasını çalıştırınız (<strong>http://localhost:8088/admin/</strong>).
-        </span>
-      </div>
-      <a href="http://localhost:8088/admin/" target="_blank" class="btn" style="background: #2D3748; color: #FFF; padding: 8px 16px; font-size: 0.82rem; white-space: nowrap; text-decoration: none;">
-        Yerel Panele Git (localhost) →
-      </a>
-    </div>
-
     <header class="top-header">
       <div class="header-title-box">
         <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 4px;">
           <h1 id="pageHeading" style="margin-bottom: 0;">Kategori & Görsel Yönetimi</h1>
-          <!-- Durum Rozeti -->
-          <div id="serverStatusPill" style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 999px; font-size: 0.74rem; font-weight: 700; background: #DEF7EC; color: #03543F; border: 1px solid #BCF0DA;">
+          <!-- 7/24 Durum Rozeti -->
+          <div id="serverStatusPill" style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 999px; font-size: 0.74rem; font-weight: 700; background: #DEF7EC; color: #03543F; border: 1px solid #BCF0DA; cursor: pointer;" onclick="openCloudAuthModal()" title="Bulut bağlantı durumunu görüntüle veya anahtarı değiştir">
             <span id="serverStatusDot" style="width: 8px; height: 8px; border-radius: 50%; background: #31C48D;"></span>
-            <span id="serverStatusText">Yerel Sunucu Bağlı</span>
+            <span id="serverStatusText">🟢 7/24 Bulut Sistemi Aktif</span>
           </div>
         </div>
         <p id="pageSubHeading">8 ana ürün grubunuza ait fotoğrafları yükleyebilir, düzenleyebilir ve silebilirsiniz.</p>
       </div>
 
       <div class="header-actions">
+        <button class="btn btn-secondary" onclick="openCloudAuthModal()" title="GitHub Bulut Anahtarını Ayarla">
+          🔑 7/24 Bulut Anahtarı
+        </button>
         <button class="btn btn-secondary" id="btnRefreshData">
           🔄 Yenile
         </button>
-        <button class="btn btn-primary" id="btnSaveAllChanges">
+        <button class="btn btn-primary" id="btnSaveAllChanges" style="box-shadow: 0 4px 14px rgba(78, 97, 74, 0.35);">
           💾 Değişiklikleri Kaydet
         </button>
         <button class="btn" id="btnSyncVercel" style="background: #111; color: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.25);" title="GitHub ve Vercel'e hemen gönder">
@@ -1099,46 +1101,53 @@
     </div>
   </div>
 
-  <!-- SUNUCU BAĞLANTI HATASI BİLGİLENDİRME MODALI -->
-  <div class="modal-backdrop" id="serverErrorModal">
-    <div class="modal-box" style="max-width: 580px;">
+  <!-- 7/24 BULUT BAĞLANTISI VE GİRİŞ MODALI -->
+  <div class="modal-backdrop" id="cloudAuthModal">
+    <div class="modal-box" style="max-width: 540px;">
       <div class="modal-header">
-        <h3 style="display: flex; align-items: center; gap: 8px; color: #9B1C1C;">
-          <span>⚠️</span> Yerel Yönetim Sunucusu Bağlantı Uyarısı
+        <h3 style="display: flex; align-items: center; gap: 8px; color: var(--text-main);">
+          <span>☁️</span> 7/24 Bulut Yönetim Sistemi
         </h3>
-        <div class="modal-close" onclick="closeServerErrorModal()">&times;</div>
+        <div class="modal-close" onclick="closeCloudAuthModal()">&times;</div>
       </div>
       <div style="padding: 24px;">
-        <p style="font-size: 0.95rem; line-height: 1.6; margin-bottom: 16px; color: #2D3748;">
-          Değişikliklerin kaydedilebilmesi ve otomatik olarak Vercel/GitHub'a gönderilebilmesi için yerel sunucunun (<strong>admin_server.py</strong>) çalışıyor olması gerekir.
+        <p style="font-size: 0.92rem; line-height: 1.6; margin-bottom: 16px; color: #4A5568;">
+          Web sitenizi bilgisayarınızı açmaya gerek kalmadan, telefonunuzdan veya dilediğiniz herhangi bir cihazdan <strong>7/24 canlı</strong> yönetmek için GitHub erişim anahtarınızı (Token) bağlayın.
         </p>
 
-        <div style="background: #FFF8E6; border: 1px solid #F6E05E; border-radius: 8px; padding: 14px 16px; margin-bottom: 18px; font-size: 0.86rem; color: #7B341E;">
-          <strong>Olası Nedenler:</strong>
-          <ul style="margin-left: 18px; margin-top: 6px;">
-            <li>Sayfayı canlı web sitesi üzerinden (<code>niltex.com.tr/admin</code>) veya doğrudan dosya olarak açmış olabilirsiniz.</li>
-            <li>Veya masaüstündeki <strong>Admin_Paneli_Baslat.command</strong> dosyası henüz çalıştırılmamış olabilir.</li>
-          </ul>
+        <div style="background: #F7FAFC; border: 1px solid #E2E8F0; border-radius: var(--radius-sm); padding: 16px; margin-bottom: 20px;">
+          <label style="display: block; font-weight: 700; font-size: 0.85rem; color: #2D3748; margin-bottom: 6px;">
+            GitHub Erişim Anahtarı (Personal Access Token) *
+          </label>
+          <input type="password" id="inputCloudToken" class="form-control" placeholder="ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" style="font-family: monospace; font-size: 0.88rem; margin-bottom: 6px;">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-size: 0.74rem; color: #718096;">Bu anahtar sadece cihazınızda güvenle saklanır. Bir kez girmeniz yeterlidir.</span>
+            <button type="button" onclick="toggleTokenVisibility()" style="background:none; border:none; color:#4E614A; font-size:0.75rem; cursor:pointer; font-weight:600;">Göster/Gizle</button>
+          </div>
         </div>
 
-        <div style="background: #F7FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 16px; margin-bottom: 18px; font-size: 0.86rem;">
-          <strong style="color: #2D3748;">Çözüm Adımları:</strong>
-          <ol style="margin-left: 20px; margin-top: 8px; line-height: 1.7; color: #4A5568;">
-            <li>Masaüstünüzdeki <strong>"Nilteks Web Sitesi"</strong> klasörünü açın.</li>
-            <li><strong>Admin_Paneli_Baslat.command</strong> dosyasına çift tıklayın.</li>
-            <li>Açılan tarayıcı sekmesinde (<strong>http://localhost:8088/admin/</strong>) değişikliklerinizi kaydedin.</li>
+        <!-- 30 Saniyelik Rehber Kutusu -->
+        <div style="background: #FFFDF7; border: 1px solid #F0E6D2; border-radius: var(--radius-sm); padding: 14px 16px; margin-bottom: 20px; font-size: 0.82rem; line-height: 1.6;">
+          <strong style="color: #7B341E; display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
+            <span>💡</span> 30 Saniyede Anahtar Nasıl Alınır?
+          </strong>
+          <ol style="margin-left: 20px; color: #5D5449;">
+            <li><a href="https://github.com/settings/tokens/new?description=niltex-website&scopes=repo" target="_blank" style="color: #2B6CB0; font-weight: 700; text-decoration: underline;">Buraya tıklayarak</a> doğrudan GitHub anahtar sayfasına gidin.</li>
+            <li>Açılan sayfada <strong>"repo"</strong> kutucuğunun işaretli olduğundan emin olun.</li>
+            <li>Sayfanın en altındaki yeşil <strong>"Generate token"</strong> butonuna basın.</li>
+            <li>Oluşan <code>ghp_...</code> ile başlayan anahtarı kopyalayıp yukarıdaki kutuya yapıştırın.</li>
           </ol>
         </div>
 
-        <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 10px;">
-          <button type="button" class="btn btn-secondary" onclick="downloadCurrentDataBackup()" title="Değişiklikleri kaybetmemek için JSON yedeğini indirin">
-            💾 Bilgileri Yedek İndir (.json)
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+          <button type="button" class="btn btn-secondary" onclick="handleForgetCloudToken()" style="color: #E53E3E;" id="btnForgetToken">
+            Anahtarı Sıfırla
           </button>
           <div style="display: flex; gap: 8px;">
-            <button type="button" class="btn btn-secondary" onclick="closeServerErrorModal()">Kapat</button>
-            <a href="http://localhost:8088/admin/" target="_blank" class="btn btn-primary">
-              Yerel Panele Git (localhost) →
-            </a>
+            <button type="button" class="btn btn-secondary" onclick="closeCloudAuthModal()">Kapat</button>
+            <button type="button" class="btn btn-primary" onclick="handleSaveCloudToken()" id="btnSaveCloudToken">
+              ✓ 7/24 Bulut Sistemini Bağla
+            </button>
           </div>
         </div>
       </div>
@@ -1155,8 +1164,96 @@
     let siteData = null;
     let selectedCategoryId = 'mutfak-peceteleri';
 
-    // 0. Yardımcı Durum ve Çevre Fonksiyonları
-    function updateServerStatus(isConnected) {
+    // 0. 7/24 Bulut ve GitHub Entegrasyonu
+    const GITHUB_REPO = 'frkn2210-ops/niltex-website';
+    const GITHUB_BRANCH = 'main';
+
+    function getCloudToken() {
+      return localStorage.getItem('niltex_cloud_token') || '';
+    }
+
+    function setCloudToken(token) {
+      if (token) {
+        localStorage.setItem('niltex_cloud_token', token.trim());
+      } else {
+        localStorage.removeItem('niltex_cloud_token');
+      }
+    }
+
+    function openCloudAuthModal() {
+      const modal = document.getElementById('cloudAuthModal');
+      const input = document.getElementById('inputCloudToken');
+      if (input) input.value = getCloudToken();
+      if (modal) modal.classList.add('active');
+    }
+
+    function closeCloudAuthModal() {
+      const modal = document.getElementById('cloudAuthModal');
+      if (modal) modal.classList.remove('active');
+    }
+
+    function toggleTokenVisibility() {
+      const inp = document.getElementById('inputCloudToken');
+      if (inp) {
+        inp.type = inp.type === 'password' ? 'text' : 'password';
+      }
+    }
+
+    async function handleSaveCloudToken() {
+      const inp = document.getElementById('inputCloudToken');
+      const token = inp ? inp.value.trim() : '';
+      if (!token) {
+        alert('Lütfen geçerli bir GitHub anahtarı giriniz.');
+        return;
+      }
+
+      showToast('⏳ Anahtar doğrulanıyor...');
+      try {
+        const testRes = await fetch(`https://api.github.com/repos/${GITHUB_REPO}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/vnd.github+json'
+          }
+        });
+
+        if (testRes.ok) {
+          setCloudToken(token);
+          closeCloudAuthModal();
+          updateServerStatus(true, '🟢 7/24 Bulut Sistemi Aktif');
+          updateCloudUI(true);
+          showToast('✓ 7/24 Bulut Sistemi Başarıyla Bağlandı!');
+        } else {
+          alert('Girdiğiniz anahtar GitHub deposuna erişemedi. Lütfen "repo" yetkisi seçtiğinizden emin olun.');
+        }
+      } catch (err) {
+        alert('GitHub bağlantı testi başarısız oldu: ' + err.message);
+      }
+    }
+
+    function handleForgetCloudToken() {
+      if (confirm('Bulut anahtarını bu cihazdan kaldırmak istediğinize emin misiniz?')) {
+        setCloudToken('');
+        closeCloudAuthModal();
+        updateCloudUI(false);
+        updateServerStatus(false, '🔑 Bulut Anahtarı Girin');
+        showToast('Anahtar kaldırıldı.');
+      }
+    }
+
+    function updateCloudUI(isActive) {
+      const badge = document.getElementById('cloudStatusBadge');
+      if (badge) {
+        if (isActive) {
+          badge.innerText = '● 7/24 Aktif';
+          badge.style.color = '#48BB78';
+        } else {
+          badge.innerText = '○ Anahtar Bekleniyor';
+          badge.style.color = '#F59E0B';
+        }
+      }
+    }
+
+    function updateServerStatus(isConnected, customText) {
       const pill = document.getElementById('serverStatusPill');
       const dot = document.getElementById('serverStatusDot');
       const text = document.getElementById('serverStatusText');
@@ -1167,72 +1264,50 @@
         pill.style.color = '#03543F';
         pill.style.borderColor = '#BCF0DA';
         dot.style.background = '#31C48D';
-        text.innerText = 'Yerel Sunucu Bağlı';
+        text.innerText = customText || '🟢 7/24 Bulut Sistemi Aktif';
       } else {
-        pill.style.background = '#FDE8E8';
-        pill.style.color = '#9B1C1C';
-        pill.style.borderColor = '#F8B4B4';
-        dot.style.background = '#F05252';
-        text.innerText = 'Sunucu Bağlantısı Yok';
+        pill.style.background = '#FEF3C7';
+        pill.style.color = '#92400E';
+        pill.style.borderColor = '#FDE68A';
+        dot.style.background = '#F59E0B';
+        text.innerText = customText || '🔑 Bulut Anahtarı Girin';
       }
     }
 
-    function showServerErrorModal() {
-      const modal = document.getElementById('serverErrorModal');
-      if (modal) modal.classList.add('active');
+    // UTF-8 güvenli Base64 çevirici (Türkçe karakterleri bozmaz)
+    function utf8ToBase64(str) {
+      return window.btoa(unescape(encodeURIComponent(str)));
     }
 
-    function closeServerErrorModal() {
-      const modal = document.getElementById('serverErrorModal');
-      if (modal) modal.classList.remove('active');
-    }
-
-    function downloadCurrentDataBackup() {
-      if (!siteData) return;
-      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(siteData, null, 2));
-      const a = document.createElement('a');
-      a.setAttribute("href", dataStr);
-      a.setAttribute("download", `nilteks_site_data_${new Date().toISOString().slice(0,10)}.json`);
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      showToast('✓ Değişiklikler JSON olarak bilgisayarınıza indirildi!');
-    }
-
-    function checkEnvironment() {
-      const banner = document.getElementById('envNoticeBanner');
-      const noticeText = document.getElementById('envNoticeText');
-      if (!banner || !noticeText) return;
-
-      if (window.location.protocol === 'file:') {
-        banner.style.display = 'flex';
-        noticeText.innerHTML = '<strong>Dosya Olarak Açıldı:</strong> Tarayıcı güvenlik kuralları nedeniyle doğrudan dosya üzerinden kayıt yapılamaz. Lütfen masaüstündeki <strong>Admin_Paneli_Baslat.command</strong> dosyasına çift tıklayarak paneli açınız (<strong>http://localhost:8088/admin/</strong>).';
-      } else if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
-        banner.style.display = 'flex';
-        noticeText.innerHTML = '<strong>Canlı Vercel Sitesindesiniz:</strong> Vercel statik bir barındırma sunduğu için buradan yapılan değişiklikler doğrudan kaydedilemez. Değişiklik yapmak ve fotoğraf yüklemek için bilgisayarınızdaki <strong>Admin_Paneli_Baslat.command</strong> dosyasını açınız (<strong>http://localhost:8088/admin/</strong>).';
-      } else {
-        banner.style.display = 'none';
-      }
+    function base64ToUtf8(str) {
+      return decodeURIComponent(escape(window.atob(str)));
     }
 
     // 1. Verileri Yükle
     async function loadData() {
-      checkEnvironment();
+      const token = getCloudToken();
+      updateCloudUI(!!token);
+
       try {
-        const res = await fetch('/api/data', { cache: 'no-store' });
-        if (!res.ok) throw new Error('API yanıt vermedi');
+        const res = await fetch('/data/site-data.json?t=' + Date.now(), { cache: 'no-store' });
+        if (!res.ok) throw new Error('data/site-data.json okunamadı');
         siteData = await res.json();
-        updateServerStatus(true);
       } catch (e) {
-        console.warn('Sunucu API bulunamadı, yerel data/site-data.json yükleniyor...', e);
-        updateServerStatus(false);
+        console.warn('Veri dosyası okunamadı, yerel ../data/site-data.json deneniyor...', e);
         try {
           const res = await fetch('../data/site-data.json');
           siteData = await res.json();
         } catch (err2) {
-          console.error('Yedek JSON okunamadı:', err2);
+          console.error('Yedek JSON da okunamadı:', err2);
         }
       }
+
+      if (token) {
+        updateServerStatus(true, '🟢 7/24 Bulut Sistemi Aktif');
+      } else {
+        updateServerStatus(false, '🔑 7/24 Bulut Anahtarı Girin');
+      }
+
       renderUI();
     }
 
@@ -1350,6 +1425,95 @@
       }
     });
 
+    // Görsel Yükleme Çekirdek Fonksiyonu (Vercel API + Doğrudan GitHub REST API)
+    async function uploadImageFile(file, categorySlug) {
+      const dataUrl = await fileToDataUrl(file);
+      const cleanName = file.name.replace(/[^a-zA-Z0-9_\-\.]/g, '_');
+      const token = getCloudToken();
+
+      // 1. Vercel Serverless /api/upload çağrısı
+      try {
+        const res = await fetch('/api/upload', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            ...(token ? { 'Authorization': `Bearer ${token}` } : {})
+          },
+          body: JSON.stringify({
+            categoryId: categorySlug,
+            filename: cleanName,
+            dataUrl: dataUrl
+          })
+        });
+
+        if (res.ok) {
+          const result = await res.json();
+          if (result.success) return result.imagePath;
+        }
+      } catch (e) {
+        console.warn('/api/upload başarısız, doğrudan GitHub API deneniyor...', e);
+      }
+
+      // 2. Doğrudan GitHub REST API üzerinden yükleme
+      if (token) {
+        try {
+          const filePath = `images/categories/${categorySlug}/${cleanName}`;
+          const apiUrl = `https://api.github.com/repos/${GITHUB_REPO}/contents/${filePath}`;
+          const base64Data = dataUrl.includes(',') ? dataUrl.split(',')[1] : dataUrl;
+
+          let sha = null;
+          const getRes = await fetch(`${apiUrl}?ref=${GITHUB_BRANCH}`, {
+            headers: {
+              'Authorization': `Bearer ${token}`,
+              'Accept': 'application/vnd.github+json'
+            }
+          });
+          if (getRes.ok) {
+            const info = await getRes.json();
+            sha = info.sha;
+          }
+
+          const putRes = await fetch(apiUrl, {
+            method: 'PUT',
+            headers: {
+              'Authorization': `Bearer ${token}`,
+              'Accept': 'application/vnd.github+json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              message: `7/24 Bulut Paneli: Fotoğraf yüklendi (${cleanName})`,
+              content: base64Data,
+              sha: sha,
+              branch: GITHUB_BRANCH
+            })
+          });
+
+          if (putRes.ok) {
+            return filePath;
+          }
+        } catch (e2) {
+          console.error('Doğrudan GitHub yükleme hatası:', e2);
+        }
+      }
+
+      // 3. Yerel sunucu desteği
+      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        try {
+          const res = await fetch('/api/upload', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ categoryId: categorySlug, filename: cleanName, dataUrl })
+          });
+          if (res.ok) {
+            const result = await res.json();
+            if (result.success) return result.imagePath;
+          }
+        } catch (e3) {}
+      }
+
+      throw new Error('Görsel buluta yüklenemedi. Lütfen "7/24 Bulut Anahtarı" butonundan GitHub anahtarınızı bağlayınız.');
+    }
+
     fileInputDirect.addEventListener('change', () => {
       if (fileInputDirect.files && fileInputDirect.files.length > 0) {
         handleDirectFiles(fileInputDirect.files);
@@ -1357,86 +1521,61 @@
     });
 
     async function handleDirectFiles(files) {
-      showToast(`📸 ${files.length} fotoğraf 1200×1800 px ebatında optimize edilip yükleniyor...`);
+      showToast(`📸 ${files.length} fotoğraf 7/24 buluta yükleniyor (1200×1800 px)...`);
       for (let i = 0; i < files.length; i++) {
         const file = files[i];
-        const dataUrl = await fileToDataUrl(file);
-        
         try {
-          const res = await fetch('/api/upload', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
+          const imagePath = await uploadImageFile(file, selectedCategoryId);
+          let emptyProd = siteData.products.find(p => p.categoryId === selectedCategoryId && (!p.image || p.image === ''));
+          if (emptyProd) {
+            emptyProd.image = imagePath;
+          } else {
+            const cat = siteData.categories.find(c => c.id === selectedCategoryId);
+            const newProd = {
+              id: 'prod_' + Date.now() + '_' + i,
               categoryId: selectedCategoryId,
-              filename: file.name,
-              dataUrl: dataUrl
-            })
-          });
-          const result = await res.json();
-
-          if (result.success) {
-            // İlgili kategoride boş görseli olan ilk ürüne ata veya yeni ürün oluştur!
-            let emptyProd = siteData.products.find(p => p.categoryId === selectedCategoryId && (!p.image || p.image === ''));
-            if (emptyProd) {
-              emptyProd.image = result.imagePath;
-            } else {
-              const cat = siteData.categories.find(c => c.id === selectedCategoryId);
-              const newProd = {
-                id: 'prod_' + Date.now() + '_' + i,
-                categoryId: selectedCategoryId,
-                titleTr: file.name.replace(/\.[^/.]+$/, "").replace(/[-_]/g, " "),
-                titleEn: file.name.replace(/\.[^/.]+$/, "").replace(/[-_]/g, " "),
-                descTr: `${cat.nameTr} koleksiyonu yeni sezon modeli.`,
-                descEn: `${cat.nameEn} new season collection model.`,
-                specsTr: ["%100 Pamuk", "Özel Dokuma"],
-                specsEn: ["100% Cotton", "Custom Weave"],
-                image: result.imagePath,
-                badgeTr: "Yeni Koleksiyon",
-                badgeEn: "New Collection"
-              };
-              siteData.products.push(newProd);
-            }
+              titleTr: file.name.replace(/\.[^/.]+$/, "").replace(/[-_]/g, " "),
+              titleEn: file.name.replace(/\.[^/.]+$/, "").replace(/[-_]/g, " "),
+              descTr: `${cat.nameTr} koleksiyonu yeni sezon modeli.`,
+              descEn: `${cat.nameEn} new season collection model.`,
+              specsTr: ["%100 Pamuk", "Özel Dokuma"],
+              specsEn: ["100% Cotton", "Custom Weave"],
+              image: imagePath,
+              badgeTr: "Yeni Koleksiyon",
+              badgeEn: "New Collection"
+            };
+            siteData.products.push(newProd);
           }
-        } catch (e) {
-          console.error('Yükleme hatası:', e);
+        } catch (err) {
+          showToast('⚠️ ' + err.message);
+          openCloudAuthModal();
+          return;
         }
       }
 
       await saveAllDataToServer();
       renderCategoryProducts(selectedCategoryId);
       renderCategoryTabs();
-      showToast('✓ Fotoğraflar başarıyla yüklendi ve eklendi!');
+      showToast('✓ Fotoğraflar 7/24 bulut sistemine yüklendi ve eklendi!');
     }
 
     // 6. Tek Bir Ürünün Görselini Değiştirme
     async function uploadSingleImageForProduct(input, prodId, catId) {
       if (!input.files || input.files.length === 0) return;
       const file = input.files[0];
-      const dataUrl = await fileToDataUrl(file);
-
-      showToast('📸 Fotoğraf yükleniyor...');
+      showToast('📸 Fotoğraf 7/24 buluta yükleniyor...');
       try {
-        const res = await fetch('/api/upload', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            categoryId: catId,
-            filename: file.name,
-            dataUrl: dataUrl
-          })
-        });
-        const result = await res.json();
-        if (result.success) {
-          const prod = siteData.products.find(p => p.id === prodId);
-          if (prod) {
-            prod.image = result.imagePath;
-            await saveAllDataToServer();
-            renderCategoryProducts(selectedCategoryId);
-            showToast('✓ Ürünün fotoğrafı güncellendi!');
-          }
+        const imagePath = await uploadImageFile(file, catId);
+        const prod = siteData.products.find(p => p.id === prodId);
+        if (prod) {
+          prod.image = imagePath;
+          await saveAllDataToServer();
+          renderCategoryProducts(selectedCategoryId);
+          showToast('✓ Ürünün fotoğrafı güncellendi!');
         }
       } catch (e) {
-        showToast('❌ Fotoğraf yüklenirken hata oluştu.');
+        showToast('❌ Fotoğraf yükleme hatası: ' + e.message);
+        openCloudAuthModal();
       }
     }
 
@@ -1493,19 +1632,12 @@
       const fileInput = document.getElementById('editImageFileInput');
       if (fileInput.files && fileInput.files.length > 0) {
         const file = fileInput.files[0];
-        const dataUrl = await fileToDataUrl(file);
-        const res = await fetch('/api/upload', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            categoryId: prod.categoryId,
-            filename: file.name,
-            dataUrl: dataUrl
-          })
-        });
-        const result = await res.json();
-        if (result.success) {
-          prod.image = result.imagePath;
+        try {
+          prod.image = await uploadImageFile(file, prod.categoryId);
+        } catch (err) {
+          showToast('⚠️ Görsel yükleme hatası: ' + err.message);
+          openCloudAuthModal();
+          return;
         }
       }
 
@@ -1535,19 +1667,12 @@
       const fileInput = document.getElementById('newProdImageFile');
       if (fileInput.files && fileInput.files.length > 0) {
         const file = fileInput.files[0];
-        const dataUrl = await fileToDataUrl(file);
-        const res = await fetch('/api/upload', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            categoryId: catId,
-            filename: file.name,
-            dataUrl: dataUrl
-          })
-        });
-        const result = await res.json();
-        if (result.success) {
-          imagePath = result.imagePath;
+        try {
+          imagePath = await uploadImageFile(file, catId);
+        } catch (err) {
+          showToast('⚠️ Görsel yükleme hatası: ' + err.message);
+          openCloudAuthModal();
+          return;
         }
       }
 
@@ -1671,78 +1796,157 @@
       reader.readAsText(file);
     };
 
-    // 13. Sunucuya Kaydetme Fonksiyonu
+    // 13. 7/24 Bulut ve Sunucuya Kaydetme Fonksiyonu
     async function saveAllDataToServer() {
       if (!siteData) {
         showToast('⚠️ Site verisi bulunamadı!');
         return false;
       }
 
-      // Canlı site veya yerel dosya uyarısı
-      if (window.location.protocol === 'file:' || (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1')) {
-        showServerErrorModal();
-        return false;
-      }
+      const token = getCloudToken();
+      showToast('💾 7/24 Bulut sistemine kaydediliyor...');
 
+      // 1. Vercel Serverless /api/save çağrısı
       try {
         const res = await fetch('/api/save', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: {
+            'Content-Type': 'application/json',
+            ...(token ? { 'Authorization': `Bearer ${token}` } : {})
+          },
           body: JSON.stringify(siteData)
         });
 
-        if (!res.ok) {
-          updateServerStatus(false);
-          showServerErrorModal();
-          return false;
+        if (res.ok) {
+          const result = await res.json();
+          if (result.success) {
+            updateServerStatus(true, '🟢 7/24 Bulut Sistemi Aktif');
+            showToast('✓ Değişiklikler GitHub ve Vercel bulutuna kaydedildi! Canlı siteniz güncelleniyor (~15 sn).');
+            return true;
+          }
         }
-
-        const result = await res.json();
-        if (result.success) {
-          updateServerStatus(true);
-          return true;
-        } else {
-          showToast('⚠️ Sunucu hatası: ' + (result.error || result.message));
-          return false;
-        }
-      } catch (e) {
-        console.error('Kaydetme bağlantı hatası:', e);
-        updateServerStatus(false);
-        showServerErrorModal();
-        return false;
+      } catch (errApi) {
+        console.warn('/api/save çağrısı başarısız, doğrudan GitHub deneniyor...', errApi);
       }
+
+      // 2. Doğrudan GitHub REST API üzerinden kaydet
+      if (token) {
+        try {
+          const filePath = 'data/site-data.json';
+          const apiUrl = `https://api.github.com/repos/${GITHUB_REPO}/contents/${filePath}`;
+
+          let sha = null;
+          const getRes = await fetch(`${apiUrl}?ref=${GITHUB_BRANCH}`, {
+            headers: {
+              'Authorization': `Bearer ${token}`,
+              'Accept': 'application/vnd.github+json'
+            }
+          });
+
+          if (getRes.ok) {
+            const fileInfo = await getRes.json();
+            sha = fileInfo.sha;
+          }
+
+          const jsonStr = JSON.stringify(siteData, null, 2);
+          const base64Content = utf8ToBase64(jsonStr);
+
+          const putRes = await fetch(apiUrl, {
+            method: 'PUT',
+            headers: {
+              'Authorization': `Bearer ${token}`,
+              'Accept': 'application/vnd.github+json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              message: '7/24 Bulut Paneli: Site verileri güncellendi',
+              content: base64Content,
+              sha: sha,
+              branch: GITHUB_BRANCH
+            })
+          });
+
+          if (putRes.ok) {
+            updateServerStatus(true, '🟢 7/24 Bulut Sistemi Aktif');
+            showToast('✓ Değişiklikler doğrudan GitHub\'a kaydedildi! Vercel 15 saniyede canlıya alıyor...');
+            return true;
+          } else {
+            const putErr = await putRes.json();
+            console.error('GitHub PUT hatası:', putErr);
+            if (putRes.status === 401 || putRes.status === 403) {
+              showToast('⚠️ GitHub anahtarınızın izinleri yetersiz veya süresi dolmuş.');
+              openCloudAuthModal();
+              return false;
+            }
+          }
+        } catch (errDirect) {
+          console.error('Doğrudan GitHub API hatası:', errDirect);
+        }
+      }
+
+      // 3. Yerel sunucu (localhost) desteği
+      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        try {
+          const localRes = await fetch('/api/save', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(siteData)
+          });
+          if (localRes.ok) {
+            const resJson = await localRes.json();
+            if (resJson.success) {
+              updateServerStatus(true, '🟢 Yerel Sunucu Bağlı');
+              showToast('✓ Değişiklikler yerel sunucuya kaydedildi!');
+              return true;
+            }
+          }
+        } catch (errLocal) {}
+      }
+
+      // Hiçbiri çalışmadıysa bulut giriş modalını aç
+      updateServerStatus(false, '🔑 Bulut Anahtarı Gerekli');
+      showToast('⚠️ 7/24 kayıt yapabilmek için lütfen GitHub Anahtarınızı bağlayınız.');
+      openCloudAuthModal();
+      return false;
     }
 
     document.getElementById('btnSaveAllChanges').onclick = async () => {
-      const ok = await saveAllDataToServer();
-      if (ok) {
-        showToast('💾 Değişiklikler kaydedildi ve Vercel/GitHub senkronizasyonu başlatıldı!');
-      }
+      await saveAllDataToServer();
     };
 
     document.getElementById('btnSyncVercel').onclick = async () => {
-      if (window.location.protocol === 'file:' || (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1')) {
-        showServerErrorModal();
+      const token = getCloudToken();
+      if (!token) {
+        openCloudAuthModal();
         return;
       }
 
       const btn = document.getElementById('btnSyncVercel');
       const originalText = btn.innerHTML;
       btn.disabled = true;
-      btn.innerHTML = '⏳ Gönderiliyor...';
-      showToast('🚀 GitHub & Vercel senkronizasyonu başlatıldı...');
+      btn.innerHTML = '⏳ Kontrol Ediliyor...';
+      showToast('🚀 GitHub ve Vercel bağlantısı kontrol ediliyor...');
+
       try {
-        const res = await fetch('/api/sync', { method: 'POST' });
-        const result = await res.json();
-        if (result.success) {
-          updateServerStatus(true);
-          showToast('✓ ' + result.message);
+        const res = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/commits/${GITHUB_BRANCH}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/vnd.github+json'
+          }
+        });
+
+        if (res.ok) {
+          const commitData = await res.json();
+          updateServerStatus(true, '🟢 7/24 Bulut Sistemi Aktif');
+          const shortSha = commitData.sha.substring(0, 7);
+          const commitMsg = commitData.commit.message;
+          showToast(`✓ Vercel & GitHub Canlı! Son Sürüm: ${shortSha} ("${commitMsg}")`);
         } else {
-          showToast('⚠️ Senkronizasyon hatası: ' + (result.error || result.message));
+          showToast('⚠️ GitHub bağlantısı kurulamadı. Anahtarınızı kontrol edin.');
+          openCloudAuthModal();
         }
       } catch (e) {
-        updateServerStatus(false);
-        showServerErrorModal();
+        showToast('⚠️ Bağlantı hatası.');
       } finally {
         btn.disabled = false;
         btn.innerHTML = originalText;
